@@ -101,7 +101,7 @@ export default {
   },
   data() {
     return {
-      pagesize: 10,
+      pagesize: 20,
       currentpage: 1,
       list: [],
       listLoading: true,
