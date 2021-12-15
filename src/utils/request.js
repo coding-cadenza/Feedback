@@ -5,7 +5,7 @@ import router from '@/router'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'https://ipandai.club/', // 在服务器上用这个
+  baseURL: 'https://ipandai.club', // 在服务器上用这个
   // baseURL: 'http://127.0.0.1:4523/mock/401326/',
   timeout: 5000, // request timeout
   withCredentials: true
@@ -13,8 +13,12 @@ const service = axios.create({
 
 // 设置为请求前如果没有cookei.username，那么就跳到登陆界面
 service.interceptors.request.use(
+
   config => {
-    // do something before request is sent
+    if (!store.getters.name) {
+      store.dispatch('user/getUserInfo')
+    }
+
     if (store.getters.name) {
       return config
     } else {
@@ -33,7 +37,6 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
-
     // 如果返回code不是200，则报错,并让用户重新登陆
     if (res.code !== 200) {
       Message({
@@ -46,7 +49,7 @@ service.interceptors.response.use(
       })
       return Promise.reject(new Error(res.message || 'Error'))
     }
-
+    console.log(res)
     return res
   },
   error => {

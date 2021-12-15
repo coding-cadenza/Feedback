@@ -1,59 +1,60 @@
 <template>
-  <div align="center" >
-        <el-carousel height="600px" indicator-position="outside"  style="width:1400px" >
-          <el-carousel-item v-for="capture in list[currentpage-1].captures" :key="capture">
-          <img :src="capture" class="rightImg">
-          </el-carousel-item>
-        </el-carousel>
-        <div class="app-container">
-        <el-table
-            :data=[list[currentpage-1]]
-            style="width: 100%"
-            border="">
-            <el-table-column
-              prop="feedback_id"
-              label="序号"
-              width="180">
-            </el-table-column>
-            <el-table-column
-              prop="client_name"
-              label="客户姓名"
-              width="200">
-            </el-table-column>
-            <el-table-column
-              prop="client_enterprise"
-              label="客户企业"
-              width="200">
-            </el-table-column>
-            <el-table-column
-              prop="target"
-              label="评价对象"
-              width="200">
-            </el-table-column>
-            <el-table-column
-              prop="content"
-              label="评价内容"
-              width="200">
-            </el-table-column>
-            <el-table-column
-              prop="type"
-              label="评价等级"
-              width="200">
-            </el-table-column>
-            <el-table-column
-              prop="operator"
-              label="操作员"
-              width="180">
-            </el-table-column>
-          </el-table>
-          </div>
-          <el-pagination
-            :current-page="currentpage"
-            :page-size="1"
-            layout="prev, pager, next"
-            :total="10"
-            @current-change="handleCurrentChange"
-       />
+  <div align="center">
+    <el-carousel height="600px" indicator-position="outside" style="width:1400px">
+      <el-carousel-item v-for="capture in list[currentpage-1].captures" :key="capture">
+        <img :src="capture" class="rightImg">
+      </el-carousel-item>
+    </el-carousel>
+    <div class="app-container">
+      <el-table
+        :data="[list[currentpage-1]]"
+        style="width: 100%"
+        border=""
+      >
+        <el-table-column
+          prop="feedback_id"
+          label="序号"
+          width="180"
+        />
+        <el-table-column
+          prop="client_name"
+          label="客户姓名"
+          width="200"
+        />
+        <el-table-column
+          prop="client_enterprise"
+          label="客户企业"
+          width="200"
+        />
+        <el-table-column
+          prop="target"
+          label="评价对象"
+          width="200"
+        />
+        <el-table-column
+          prop="content"
+          label="评价内容"
+          width="200"
+        />
+        <el-table-column
+          prop="type"
+          label="评价等级"
+          width="200"
+        />
+        <el-table-column
+          prop="operator"
+          label="操作员"
+          width="180"
+        />
+      </el-table>
+    </div>
+    <el-pagination
+      :current-page="currentpage"
+      :page-size="1"
+      layout="prev, pager, next"
+      :total="10"
+      @current-change="handleCurrentChange"
+    />
   </div>
 
 </template>
@@ -63,7 +64,7 @@ export default {
   data() {
     return {
       currentpage: 1,
-      list : [{
+      list: [{
         feedback_id: '1',
         input_time: '8464',
         type: '1',
@@ -75,8 +76,8 @@ export default {
         captures: [
           '../assert/111.jpg',
           '../assert/111.jpg'
-        ]},
-        {
+        ] },
+      {
         feedback_id: '2',
         input_time: '8464',
         type: '1',
@@ -88,40 +89,37 @@ export default {
         captures: [
           '../assert/111.jpg',
           '../assert/111.jpg'
-        ]}],
-        listLoading: true,
-        listQuery: {
+        ] }],
+      listLoading: true,
+      listQuery: {
         page: 5,
         limit: 20
       }
     }
   },
-  methods:{
+  methods: {
     created() {
       this.getFamilyBase_info()
-            // 每次进入界面时，先清除之前的所有定时器，然后启动新的定时器
-            clearInterval(this.timer)
-            this.timer = null
-            this.setTimer()
-    },
-    destroyed(){
-      //每次离开界面时，清除定时器
+      // 每次进入界面时，先清除之前的所有定时器，然后启动新的定时器
       clearInterval(this.timer)
-      this.time=null
+      this.timer = null
+      this.setTimer()
+    },
+    destroyed() {
+      // 每次离开界面时，清除定时器
+      clearInterval(this.timer)
+      this.time = null
     },
     handleCurrentChange(newPage) {
-      this.currentpage=newPage
+      this.currentpage = newPage
     },
-    changePage(){
-     page=this.currentpage;
-      if(page==10)
-       page=1
-      else
-        page=page+1
-      this.currentpage=page;
+    changePage() {
+      var page = this.currentpage
+      if (page === 10) { page = 1 } else { page = page + 1 }
+      this.currentpage = page
     },
-    setTimer(){
-      this.timer = setInterval(this.changePage,1000)
+    setTimer() {
+      this.timer = setInterval(this.changePage, 1000)
     }
   }
 }
@@ -138,7 +136,7 @@ export default {
     line-height: 300px;
     margin: 0;
   }
-  
+
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }

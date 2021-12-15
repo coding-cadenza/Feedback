@@ -1,5 +1,6 @@
 import { logout } from '@/api/user'
 import { resetRouter } from '@/router'
+
 import Cookies from 'js-cookie'
 const getDefaultState = () => {
   return {
@@ -45,8 +46,19 @@ const actions = {
   },
 
   // 重置信息
-  resetUserInfo({ commit, state }) {
-    commit('RESET_STATE') // 将用户名和头像清空
+  resetUserInfo({ commit }) {
+    return new Promise(resolve => {
+      commit('RESET_STATE') // 将用户名和头像清空
+      resolve()
+    })
+  },
+  getUserInfo({ commit }) {
+    return new Promise(resolve => {
+      // 获取头像和用户名
+      commit('GET_NAME')
+      commit('GET_NAME')
+      resolve()
+    })
   }
 }
 
