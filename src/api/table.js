@@ -3,7 +3,7 @@ import request from '@/utils/request'
 export function getList(page) {
   return request({
     url: '/api/feedback/list/' + page,
-
+   
     method: 'get'
 
   })

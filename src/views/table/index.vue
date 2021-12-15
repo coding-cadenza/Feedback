@@ -22,13 +22,13 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="客户企业" width="180">
+      <el-table-column align="center" label="客户企业" width="100">
         <template slot-scope="scope">
           {{ scope.row.client_enterprise }}
         </template>
       </el-table-column>
 
-      <el-table-column label="评价对象" width="180" align="center">
+      <el-table-column label="评价对象" width="100" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.target }}</span>
         </template>
@@ -42,14 +42,14 @@
 
       <el-table-column class-name="status-col" label="评价等级" width="90" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.type }}</el-tag>
+          <el-tag :type=color[scope.row.type-1]> {{pinglun[scope.row.type-1]}} </el-tag>
         </template>
       </el-table-column>
 
-      <el-table-column align="center" prop="created_at" label="反馈截图" width="240">
+      <el-table-column align="center" prop="created_at" label="反馈截图" width="200">
         <template slot-scope="scope">
           <span v-for="capture in scope.row.captures " :key="capture">
-            <el-image style="width: 20px; height: 20px" :src="capture" :preview-src-list="[capture]" />
+            <el-image  :src="capture" :preview-src-list="[capture]" />
           </span>
         </template>
       </el-table-column>
@@ -109,7 +109,9 @@ export default {
       listQuery: {
         page: 5,
         limit: 20
-      }
+      },
+      pinglun: ["差评", "中评", "好评"],
+      color:["danger","","success"]
     }
   },
   created() {
@@ -152,5 +154,9 @@ export default {
 /* 设置鼠标移动到创建表单上边显示文字 */
 .create-form:hover::after{
 
+}
+.el-image{
+  width: 30%;
+  height: 80%;
 }
 </style>
