@@ -16,7 +16,8 @@ export default {
       'id': 'wx_reg',
       'appid': 'ww3b790a02102fe9a4',
       'agentid': '1000002',
-      'redirect_uri': 'https%3A%2F%2Fipandai.club%2Fapi%2Flogin'
+      'redirect_uri': 'https%3A%2F%2Fipandai.club%2Fapi%2Flogin',
+      'state': 'STATE'
     })
   }
 }
