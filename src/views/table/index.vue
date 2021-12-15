@@ -81,7 +81,7 @@
     />
     <div align="right">
       <el-button type="primary" icon="el-icon-plus" @click="newInf()" />
-      <el-button type="primary" icon="el-icon-plus" @click="onCreated()" />
+      <el-button class="create-form" type="primary" icon="el-icon-plus" @click="onCreated()" />
     </div>
   </div>
 </template>
@@ -113,7 +113,6 @@ export default {
     }
   },
   created() {
-    this.$store.commit('user/SET_COOKEI')
     this.fetchData(this.currentpage)
   },
   methods: {
@@ -150,17 +149,8 @@ export default {
 }
 </script>
 <style scoped>
-/* .create-form:hover::after{
-    position: absolute;
-		left: 15px;
-		top: 5px;
-		padding: 5px;
-		background-color: #0095ff;
-		border-radius: 5px;
-		color: #fff;
+/* 设置鼠标移动到创建表单上边显示文字 */
+.create-form:hover::after{
 
-		content: attr(添加反馈);
-		z-index: 2;
-		width: 120px;
-} */
+}
 </style>

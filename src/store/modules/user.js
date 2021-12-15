@@ -17,9 +17,6 @@ const mutations = {
   },
   GET_AVATAR: (state, avatar) => {
     state.avatar = Cookies.get('avatar')
-  },
-  SET_COOKEI: (state) => {
-    Cookies.set('username', '岑锦锋', { path: '/' })
   }
 }
 

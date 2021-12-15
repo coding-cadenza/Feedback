@@ -3,8 +3,7 @@ import request from '@/utils/request'
 export function GetItemById(id) {
   return request({
     url: '/api/feedback/' + id,
-    method: 'get',
-    withCredentials: true
+    method: 'get'
   })
 }
 
