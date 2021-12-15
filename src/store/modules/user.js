@@ -3,8 +3,8 @@ import { resetRouter } from '@/router'
 import Cookies from 'js-cookie'
 const getDefaultState = () => {
   return {
-    name: '岑锦锋', // 用户名
-    avatar: 'dsad' // 头像
+    name: '', // 用户名
+    avatar: '' // 头像
   }
 }
 const state = getDefaultState()
@@ -12,10 +12,10 @@ const mutations = {
   RESET_STATE: (state) => {
     Object.assign(state, getDefaultState())
   },
-  GET_NAME: (state, name) => {
+  GET_NAME: (state) => {
     state.name = Cookies.get('username')
   },
-  GET_AVATAR: (state, avatar) => {
+  GET_AVATAR: (state) => {
     state.avatar = Cookies.get('avatar')
   }
 }
@@ -26,6 +26,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit('GET_NAME')
       commit('GET_AVATAR')
+
       resolve()
     })
   },

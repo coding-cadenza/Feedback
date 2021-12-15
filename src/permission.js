@@ -10,7 +10,7 @@ router.beforeEach(async(to, from, next) => {
   NProgress.start()
   // 如果是到登录页面，获取name,那么直接到达table页面
   if (to.path === '/login') {
-    // await store.dispatch('user/login')
+    await store.dispatch('user/login')
     if (store.getters.name) {
       next({ path: '/table' })
     } else {
