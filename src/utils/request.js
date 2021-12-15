@@ -7,8 +7,8 @@ import router from '@/router'
 const service = axios.create({
   baseURL: 'https://ipandai.club', // 在服务器上用这个
   // baseURL: 'http://127.0.0.1:4523/mock/401326/',
-  timeout: 5000, // request timeout
-  withCredentials: true
+  timeout: 5000 // request timeout
+  // withCredentials: true
 })
 
 // 设置为请求前如果没有cookei.username，那么就跳到登陆界面

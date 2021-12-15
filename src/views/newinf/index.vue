@@ -1,5 +1,6 @@
 <template>
   <div align="center">
+
     <el-carousel height="600px" indicator-position="outside" style="width:1400px">
       <el-carousel-item v-for="capture in list[currentpage-1].captures" :key="capture">
         <img :src="capture" class="rightImg">
@@ -48,13 +49,15 @@
         />
       </el-table>
     </div>
-    <el-pagination
-      :current-page="currentpage"
-      :page-size="1"
-      layout="prev, pager, next"
-      :total="10"
-      @current-change="handleCurrentChange"
-    />
+    <div>
+      <el-pagination
+        :current-page="currentpage"
+        :page-size="1"
+        layout="prev, pager, next"
+        :total="10"
+        @current-change="handleCurrentChange"
+      />
+    </div>
   </div>
 
 </template>

@@ -12,6 +12,6 @@ export function DeleteById(id) {
     url: '/api/feedback/{id}' + id,
     method: 'get'
   }).then(res => {
-    console.log(res)
+
   })
 }
