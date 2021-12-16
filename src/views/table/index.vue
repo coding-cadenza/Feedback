@@ -79,9 +79,10 @@
       @current-change="handleCurrentChange"
     />
     <div align="right">
-      <el-button type="primary" title="导出csv" style="text-size=15px" icon="el-icon-download" @click="onExportData()" />
-      <el-button type="primary" title="展示最新反馈" style="text-size=15px" icon="el-icon-s-platform" @click="onNewInf()" />
-      <el-button class="create-form" title="创建表单" type="primary" icon="el-icon-plus" @click="onCreated()" />
+
+      <el-button class="size" type="primary" title="导出反馈" style="text-size=15px" icon="el-icon-download" @click="onExportData()" />
+      <el-button class="size" type="primary" title="显示最新反馈" style="text-size=15px" icon="el-icon-s-platform" @click="onNewInf()" />
+      <el-button class="create-form size" title="创建表单" type="primary" icon="el-icon-plus" @click="onCreated()" />
     </div>
   </div>
 </template>
@@ -176,7 +177,7 @@ export default {
   width: 30%;
   height: 80%;
 }
-.el-button{
+.size{
   font-size: 25px;
   padding: 7px,19px;
 }
