@@ -1,7 +1,7 @@
 <template>
   <div align="center" >
 
-        <el-carousel height="600px" indicator-position="outside"  style="width:1400px" >
+        <el-carousel height="540px" indicator-position="outside"  style="width:1400px" >
           <el-carousel-item v-for="capture in list[currentpage-1].captures" :key="capture">
           <img :src="capture" class="rightImg">
           </el-carousel-item>
@@ -53,7 +53,7 @@
             :current-page="currentpage"
             :page-size="1"
             layout="prev, pager, next"
-            :total="10"
+            :total="total"
             @current-change="handleCurrentChange"
        />
        </div>
@@ -66,6 +66,7 @@ export default {
   data() {
     return {
       currentpage: 1,
+      total: 5,
       list : [{
         feedback_id: '1',
         input_time: '8464',
@@ -91,7 +92,46 @@ export default {
         captures: [
           '../assert/111.jpg',
           '../assert/111.jpg'
-        ]}],
+        ]},
+        {
+        feedback_id: '3',
+        input_time: '8464',
+        type: '1',
+        client_name: '王志辰',
+        client_enterprise: '夜莺科技',
+        target: '微伴助手',
+        content: '真的好用',
+        operator: 'name',
+        captures: [
+          '../assert/111.jpg',
+          '../assert/111.jpg'
+        ]},
+        {
+        feedback_id: '4',
+        input_time: '8464',
+        type: '1',
+        client_name: '王志辰',
+        client_enterprise: '夜莺科技',
+        target: '微伴助手',
+        content: '真的好用',
+        operator: 'name',
+        captures: [
+          '../assert/111.jpg',
+          '../assert/111.jpg'
+        ]},
+        {
+        feedback_id: '5',
+        input_time: '8464',
+        type: '1',
+        client_name: '王志辰',
+        client_enterprise: '夜莺科技',
+        target: '微伴助手',
+        content: '真的好用',
+        operator: 'name',
+        captures: [
+          '../assert/111.jpg',
+          '../assert/111.jpg'
+        ]},],
         listLoading: true,
         listQuery: {
         page: 5,
@@ -99,9 +139,11 @@ export default {
       }
     }
   },
+  mounted:function(){
+    this.created()
+  },
   methods:{
     created() {
-      this.getFamilyBase_info()
             // 每次进入界面时，先清除之前的所有定时器，然后启动新的定时器
             clearInterval(this.timer)
             this.timer = null
@@ -116,8 +158,8 @@ export default {
       this.currentpage=newPage
     },
     changePage(){
-     page=this.currentpage;
-      if(page==10)
+     var page=this.currentpage;
+      if(page==this.total)
        page=1
       else
         page=page+1
