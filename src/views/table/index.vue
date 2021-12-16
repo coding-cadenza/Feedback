@@ -80,8 +80,8 @@
       @current-change="handleCurrentChange"
     />
     <div align="right">
-      <el-button class="size" type="primary" title="保存csv " style="text-size=15px" icon="el-icon-download" />
-      <el-button class="size" type="primary" title="新表单" style="text-size=15px" icon="el-icon-s-platform" @click="newInf()" />
+      <el-button class="size" type="primary" title="导出数据" style="text-size=15px" icon="el-icon-download" />
+      <el-button class="size" type="primary" title="显示最新数据" style="text-size=15px" icon="el-icon-s-platform" @click="newInf()" />
       <el-button class="create-form size" title="创建表单" type="primary" icon="el-icon-plus" @click="onCreated()" />
     </div>
   </div>
