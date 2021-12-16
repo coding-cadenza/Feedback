@@ -62,7 +62,7 @@
 
 </template>
 <script>
-
+import { GetLestItem } from '@/api/table'
 export default {
   data() {
     return {
@@ -123,6 +123,11 @@ export default {
     },
     setTimer() {
       this.timer = setInterval(this.changePage, 1000)
+    },
+    getLestItem() {
+      GetLestItem().then(res => {
+        this.list = res.list
+      })
     }
   }
 }

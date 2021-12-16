@@ -110,7 +110,7 @@ export default {
         page: 5,
         limit: 20
       },
-      pinglun: ['差评', '中评', '好评'],
+      pinglun: ['差劲', '一般', '良好'],
       color: ['danger', '', 'success']
     }
   },
@@ -145,7 +145,14 @@ export default {
       this.$router.push('/newInf')
     },
     onDelete(id) {
-      DeleteById(id)
+      DeleteById(id).then(res => {
+        this.$message({
+          message: '删除成功',
+          type: 'success',
+          duration: 5 * 1000
+        })
+        location.reload()
+      })
     }
   }
 }

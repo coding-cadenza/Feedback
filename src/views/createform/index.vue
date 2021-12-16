@@ -221,7 +221,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           CreatItem(this.form).then(res => {
-            this.Message({
+            this.$message({
               message: '创建成功',
               type: 'success',
               duration: 5 * 1000
