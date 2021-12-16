@@ -31,7 +31,6 @@ export default {
     // await 来等待，相当于then
     async logout() {
       await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }
 }
@@ -64,6 +63,7 @@ export default {
     }
     .user-name-logout{
        display: inline-block;
+       vertical-align: bottom;
        height: 50px;
        width: 70px;
        position: relative;
@@ -74,7 +74,7 @@ export default {
         height: 18px;
        }
        .log-out{
-        margin-top: 2px;
+        margin-top: 7px;
        }
 
     }
