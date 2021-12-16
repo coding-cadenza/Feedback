@@ -244,7 +244,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 .line{
   text-align: center;
 }

@@ -168,7 +168,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style >
 /* 设置鼠标移动到创建表单上边显示文字 */
 .create-form:hover::after{
 

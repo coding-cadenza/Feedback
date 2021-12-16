@@ -8,10 +8,9 @@
     </el-carousel>
     <div class="container">
       <!-- 向左的按钮 -->
-      <div class="bt-container"><el-button icon="el-icon-arrow-left" circle /></div>
+      <div class="bt-container" @mouseenter="showButton()" @mouseleave="hideButton()"><el-button class="my-button" :class="{'hide-button': hidebutton,}" icon="el-icon-arrow-left" circle /></div>
       <el-table
         :data="[list[currentpage-1]]"
-
         border
       >
         <el-table-column
@@ -60,13 +59,9 @@
           width="100px"
           :show-overflow-tooltip="true"
         />
-        </el-table-column>
-        </el-table-column>
       </el-table>
-
       <!-- 向右的按钮 -->
-      <div class="bt-container"><el-button icon="el-icon-arrow-right" circle /></div>
-
+      <div class="bt-container" @mouseenter="showButton()" @mouseleave="hideButton()"><el-button class="my-button" :class="{'hide-button': hidebutton,}" icon="el-icon-arrow-right" circle /></div>
     </div>
     <div>
       <el-pagination
@@ -86,7 +81,7 @@ export default {
   data() {
     return {
       currentpage: 1,
-
+      hidebutton: true,
       total: 5,
       pinglun: ['差劲', '一般', '良好'],
       color: ['danger', '', 'success'],
@@ -135,18 +130,30 @@ export default {
         this.total = this.list.length
         console.log(this.list)
       })
+    },
+    showButton() {
+      this.hidebutton = false
+    },
+    hideButton() {
+      this.hidebutton = true
     }
   }
 }
 </script>
-<style scope>
 
-/* 图片的尺寸 */
-.el-carousel__container {
+<style scoped>
+>>> .el-carousel__container {
+    position: relative;
     height: 95%;
     width: 100%;
-    margin: 0;
+    padding: 0;
   }
+
+.roll-container{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
 
  .el-pagination{
    display: none;
@@ -176,11 +183,6 @@ export default {
   color: #ffffff;
 }
 
-.roll-container{
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
 .img-carousel {
 width: 100%;
 height: 83%;
@@ -189,14 +191,13 @@ overflow: hidden;
 .container{
   width: 100%;
   height: 16%;
-  display: inline-block;
-  vertical-align:middle;
+
 }
 .el-table{
   height: 95%;
   width: 90%;
   display: inline-block;
-  vertical-align:middle;
+  vertical-align: middle;
 }
 
 /* 表格里面那两行 */
@@ -216,13 +217,12 @@ height: 40%;
 
 .bt-container{
 display: inline-block;
-
 height: 100%;
 width: 5%;
 }
 
-.el-button{
-left: 50%;
+.hide-button{
+  visibility: hidden;
 }
 
 </style>
