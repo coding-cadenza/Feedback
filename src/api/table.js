@@ -11,7 +11,18 @@ export function DeleteById(id) {
   return request({
     url: '/api/feedback/{id}' + id,
     method: 'get'
-  }).then(res => {
+  })
+}
+export function GetLestItem() {
+  return request({
+    url: '/api/feedback/latest',
+    method: 'get'
+  })
+}
 
+export function ExportData() {
+  return request({
+    url: '/api/feedback/csv',
+    method: 'get'
   })
 }
