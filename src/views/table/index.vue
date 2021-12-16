@@ -42,14 +42,14 @@
 
       <el-table-column class-name="status-col" label="评价等级" width="90" align="center">
         <template slot-scope="scope">
-          <el-tag :type=color[scope.row.type-1]> {{pinglun[scope.row.type-1]}} </el-tag>
+          <el-tag :type="color[scope.row.type-1]"> {{ pinglun[scope.row.type-1] }} </el-tag>
         </template>
       </el-table-column>
 
       <el-table-column align="center" prop="created_at" label="反馈截图" width="200">
         <template slot-scope="scope">
           <span v-for="capture in scope.row.captures " :key="capture">
-            <el-image  :src="capture" :preview-src-list="[capture]" />
+            <el-image :src="capture" :preview-src-list="[capture]" />
           </span>
         </template>
       </el-table-column>
@@ -80,8 +80,9 @@
       @current-change="handleCurrentChange"
     />
     <div align="right">
-      <el-button type="primary" icon="el-icon-plus" @click="newInf()" />
-      <el-button class="create-form" type="primary" icon="el-icon-plus" @click="onCreated()" />
+      <el-button type="primary" title="保存csv" style="text-size=15px" icon="el-icon-download" />
+      <el-button type="primary" title="新表单" style="text-size=15px" icon="el-icon-s-platform" @click="newInf()" />
+      <el-button class="create-form" title="创建表单" type="primary" icon="el-icon-plus" @click="onCreated()" />
     </div>
   </div>
 </template>
@@ -110,8 +111,8 @@ export default {
         page: 5,
         limit: 20
       },
-      pinglun: ["差评", "中评", "好评"],
-      color:["danger","","success"]
+      pinglun: ['差评', '中评', '好评'],
+      color: ['danger', '', 'success']
     }
   },
   created() {
@@ -158,5 +159,9 @@ export default {
 .el-image{
   width: 30%;
   height: 80%;
+}
+.el-button{
+  font-size: 25px;
+  padding: 7px,19px;
 }
 </style>

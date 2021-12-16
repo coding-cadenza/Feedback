@@ -11,6 +11,7 @@ router.beforeEach(async(to, from, next) => {
   // 如果是到登录页面，获取name,那么直接到达table页面
   if (to.path === '/login') {
     await store.dispatch('user/login')
+    console.log(store.getters.name)
     if (store.getters.name) {
       next({ path: '/table' })
     } else {

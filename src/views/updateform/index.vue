@@ -70,9 +70,9 @@
             <el-row>
               <el-form-item label="评价性质" prop="type">
                 <el-radio-group v-model="form.type" size="medium">
-                  <el-radio border label="3">良好</el-radio>
-                  <el-radio border label="2">一般</el-radio>
-                  <el-radio border label="1">差劲</el-radio>
+                  <el-radio border :label="3">良好</el-radio>
+                  <el-radio border :label="2">一般</el-radio>
+                  <el-radio border :label="1">差劲</el-radio>
                 </el-radio-group>
               </el-form-item>
             </el-row>

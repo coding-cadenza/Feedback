@@ -1,5 +1,5 @@
 import { logout } from '@/api/user'
-import { resetRouter } from '@/router'
+
 import Cookies from 'js-cookie'
 const getDefaultState = () => {
   return {
@@ -32,11 +32,11 @@ const actions = {
   },
 
   // 用户退出登录时(像后端发送请求，并在这里把用户信息给干掉)
-  logout({ commit, state }) {
+  logout({ commit }) {
     return new Promise((resolve, reject) => {
       logout.then(() => {
         commit('RESET_STATE') // 将用户名和头像清空
-        resetRouter() // 重置路由
+
         resolve()
       }).catch(error => {
         reject(error)
@@ -45,8 +45,19 @@ const actions = {
   },
 
   // 重置信息
-  resetUserInfo({ commit, state }) {
-    commit('RESET_STATE') // 将用户名和头像清空
+  resetUserInfo({ commit }) {
+    return new Promise(resolve => {
+      commit('RESET_STATE') // 将用户名和头像清空
+      resolve()
+    })
+  },
+  getUserInfo({ commit }) {
+    return new Promise(resolve => {
+      // 获取头像和用户名
+      commit('GET_NAME')
+      commit('GET_NAME')
+      resolve()
+    })
   }
 }
 

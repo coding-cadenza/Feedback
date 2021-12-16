@@ -1,16 +1,16 @@
 <template>
-  <div align="center" >
+  <div align="center">
 
         <el-carousel height="540px" indicator-position="outside"  style="width:1400px" >
           <el-carousel-item v-for="capture in list[currentpage-1].captures" :key="capture">
           <img :src="capture" class="rightImg">
           </el-carousel-item>
         </el-carousel>
-        <div class="app-container">
+        <div class="container">
         <el-table
             :data=[list[currentpage-1]]
             style="width: 100%"
-            border="">
+        border>
             <el-table-column
               prop="feedback_id"
               label="序号"
@@ -36,15 +36,15 @@
               label="评价内容"
               width="200">
             </el-table-column>
-            <el-table-column
-              prop="type"
-              label="评价等级"
-              width="200">
+            <el-table-column class-name="status-col" label="评价等级" width="200" align="center">
+               <template slot-scope="scope">
+               <el-tag :type="color[scope.row.type-1]"> {{ pinglun[scope.row.type-1] }} </el-tag>
+                </template>
             </el-table-column>
             <el-table-column
               prop="operator"
               label="操作员"
-              width="180">
+              width="200">
             </el-table-column>
           </el-table>
           </div>
@@ -67,6 +67,8 @@ export default {
     return {
       currentpage: 1,
       total: 5,
+      pinglun: ['差评', '中评', '好评'],
+      color: ['danger', '', 'success'],
       list : [{
         feedback_id: '1',
         input_time: '8464',
@@ -79,8 +81,8 @@ export default {
         captures: [
           '../assert/111.jpg',
           '../assert/111.jpg'
-        ]},
-        {
+        ] },
+      {
         feedback_id: '2',
         input_time: '8464',
         type: '1',
@@ -92,7 +94,7 @@ export default {
         captures: [
           '../assert/111.jpg',
           '../assert/111.jpg'
-        ]},
+        ] },
         {
         feedback_id: '3',
         input_time: '8464',
@@ -105,7 +107,7 @@ export default {
         captures: [
           '../assert/111.jpg',
           '../assert/111.jpg'
-        ]},
+        ] },
         {
         feedback_id: '4',
         input_time: '8464',
@@ -118,7 +120,7 @@ export default {
         captures: [
           '../assert/111.jpg',
           '../assert/111.jpg'
-        ]},
+        ] },
         {
         feedback_id: '5',
         input_time: '8464',
@@ -131,9 +133,10 @@ export default {
         captures: [
           '../assert/111.jpg',
           '../assert/111.jpg'
-        ]},],
-        listLoading: true,
-        listQuery: {
+        ] },
+        ],
+      listLoading: true,
+      listQuery: {
         page: 5,
         limit: 20
       }
@@ -149,13 +152,13 @@ export default {
             this.timer = null
             this.setTimer()
     },
-    destroyed(){
-      //每次离开界面时，清除定时器
+    destroyed() {
+      // 每次离开界面时，清除定时器
       clearInterval(this.timer)
-      this.time=null
+      this.time = null
     },
     handleCurrentChange(newPage) {
-      this.currentpage=newPage
+      this.currentpage = newPage
     },
     changePage(){
      var page=this.currentpage;
@@ -165,8 +168,8 @@ export default {
         page=page+1
       this.currentpage=page;
     },
-    setTimer(){
-      this.timer = setInterval(this.changePage,1000)
+    setTimer() {
+      this.timer = setInterval(this.changePage, 1000)
     }
   }
 }
@@ -174,16 +177,20 @@ export default {
 <style>
 .rightImg {
   width: 1400px;
-  height: 600px;
+  height: 540px;
 }
-  .el-carousel__item h3 {
+.container{
+  width: 1400px;
+  height: 120px;
+}
+.el-carousel__item h3 {
     color: #475669;
     font-size: 18px;
     opacity: 0.75;
     line-height: 300px;
     margin: 0;
   }
-  
+
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
