@@ -13,7 +13,7 @@ export function DeleteById(id) {
     method: 'get'
   })
 }
-export function GetLestItem() {
+export function GetLatestItem() {
   return request({
     url: '/api/feedback/latest',
     method: 'get'

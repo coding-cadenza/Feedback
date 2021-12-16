@@ -12,7 +12,7 @@
     >
       <el-table-column align="center" label="序号" width="100">
         <template slot-scope="scope">
-          {{ scope.$index }}
+          {{ baseindex+scope.$index }}
         </template>
       </el-table-column>
 
@@ -76,19 +76,18 @@
       :page-size="pagesize"
       layout="total, prev, pager, next, jumper"
       :total="total"
-      @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
     <div align="right">
-      <el-button type="primary" title="保存csv" style="text-size=15px" icon="el-icon-download" />
-      <el-button type="primary" title="新表单" style="text-size=15px" icon="el-icon-s-platform" @click="newInf()" />
+      <el-button type="primary" title="导出csv" style="text-size=15px" icon="el-icon-download" @click="onExportData()" />
+      <el-button type="primary" title="展示最新反馈" style="text-size=15px" icon="el-icon-s-platform" @click="onNewInf()" />
       <el-button class="create-form" title="创建表单" type="primary" icon="el-icon-plus" @click="onCreated()" />
     </div>
   </div>
 </template>
 <script>
-import { getList } from '@/api/table'
-import { DeleteById } from '@/api/table'
+import { getList, DeleteById, ExportData } from '@/api/table'
+
 export default {
   filters: {
     statusFilter(status) {
@@ -102,6 +101,7 @@ export default {
   },
   data() {
     return {
+      baseindex: '',
       pagesize: 20,
       currentpage: 1,
       list: [],
@@ -126,14 +126,16 @@ export default {
         this.list = response.data.list
         this.total = response.data.count
         this.listLoading = false
+        this.baseindex = (newPage - 1) * this.pagesize
       })
     },
-    handleSizeChange(newSize) {
-      this.listQuery.pagesize = newSize
-    },
+
     handleCurrentChange(newPage) {
       this.listQuery.pagenum = newPage
       this.fetchData(newPage)
+      // 回到顶部
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
     },
 
     onUpdate(id) {
@@ -142,7 +144,7 @@ export default {
     onCreated() {
       this.$router.push('/form/createform')
     },
-    newInf() {
+    onNewInf() {
       this.$router.push('/newInf')
     },
     onDelete(id) {
@@ -154,7 +156,14 @@ export default {
         })
         location.reload()
       })
+    },
+    onExportData() {
+      ExportData().then(res => {
+        console.log(res.url)
+        window.open(res.url)
+      })
     }
+
   }
 }
 </script>

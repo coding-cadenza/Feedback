@@ -40,7 +40,6 @@ service.interceptors.response.use(
     if (res.code !== 200) {
       return Promise.reject(new Error(res.meg || 'Error'))
     }
-    console.log(res)
     return res
   },
   error => {
