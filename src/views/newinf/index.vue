@@ -1,43 +1,55 @@
 <template>
-  <div align="center">
+  <div align="center" class="roll-container">
 
-    <el-carousel height="80%" indicator-position="outside" style="width:100%">
+    <el-carousel class="img-carousel" indicator-position="outside">
       <el-carousel-item v-for="capture in list[currentpage-1].captures" :key="capture">
         <img :src="capture" class="rightImg">
       </el-carousel-item>
     </el-carousel>
     <div class="container">
+      <!-- 向左的按钮 -->
+      <div class="bt-container"><el-button icon="el-icon-arrow-left" circle /></div>
       <el-table
         :data="[list[currentpage-1]]"
-        style="width: 100%"
+
         border
       >
         <el-table-column
+          align="center"
           prop="feedback_id"
           label="序号"
-          width="180"
+          width="100px"
+          :show-overflow-tooltip="true"
         />
         <el-table-column
+          align="center"
           prop="client_name"
           label="客户姓名"
-          width="200"
+          width="100px"
+          :show-overflow-tooltip="true"
         />
         <el-table-column
+          align="center"
           prop="client_enterprise"
           label="客户企业"
-          width="200"
+          width="100px"
+          :show-overflow-tooltip="true"
+        />
         />
         <el-table-column
+          align="center"
           prop="target"
           label="评价对象"
-          width="200"
+          width="100px"
+          :show-overflow-tooltip="true"
         />
         <el-table-column
           prop="content"
           label="评价内容"
-          width="200"
+          style="overflow: scroll;"
+          :show-overflow-tooltip="true"
         />
-        <el-table-column class-name="status-col" label="评价等级" width="200" align="center">
+        <el-table-column class-name="status-col" label="评价等级" width="100px" align="center">
           <template slot-scope="scope">
             <el-tag :type="color[scope.row.type-1]"> {{ pinglun[scope.row.type-1] }} </el-tag>
           </template>
@@ -45,9 +57,16 @@
         <el-table-column
           prop="operator"
           label="操作员"
-          width="200"
+          width="100px"
+          :show-overflow-tooltip="true"
         />
+        </el-table-column>
+        </el-table-column>
       </el-table>
+
+      <!-- 向右的按钮 -->
+      <div class="bt-container"><el-button icon="el-icon-arrow-right" circle /></div>
+
     </div>
     <div>
       <el-pagination
@@ -67,10 +86,11 @@ export default {
   data() {
     return {
       currentpage: 1,
+
       total: 5,
       pinglun: ['差劲', '一般', '良好'],
       color: ['danger', '', 'success'],
-      list: [],
+      list: [{ captrue: [] }],
       listLoading: true,
       listQuery: {
         page: 5,
@@ -81,7 +101,7 @@ export default {
 
   created() {
     this.getLatestItem() // 获取最新数据
-    this.startTimer()// 启动计时器
+    // this.startTimer()// 启动计时器
   },
   destroyed() {
     this.destroyTimer() // 清除计时器
@@ -111,28 +131,31 @@ export default {
     },
     getLatestItem() {
       GetLatestItem().then(res => {
-        this.list = res.list
+        this.list = res.data.list
+        this.total = this.list.length
+        console.log(this.list)
       })
     }
   }
 }
 </script>
-<style>
-.rightImg {
-  width: 1400px;
-  height: 540px;
-}
-.container{
-  width: 1400px;
-  height: 120px;
-}
-.el-carousel__item h3 {
-    color: #475669;
-    font-size: 18px;
-    opacity: 0.75;
-    line-height: 300px;
+<style scope>
+
+/* 图片的尺寸 */
+.el-carousel__container {
+    height: 95%;
+    width: 100%;
     margin: 0;
   }
+
+ .el-pagination{
+   display: none;
+ }
+.el-carousel__item{
+  color: #475669;
+   height: 100%;
+    width: 100%;
+}
 
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
@@ -152,4 +175,54 @@ export default {
   align-items: center;
   color: #ffffff;
 }
+
+.roll-container{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.img-carousel {
+width: 100%;
+height: 83%;
+overflow: hidden;
+}
+.container{
+  width: 100%;
+  height: 16%;
+  display: inline-block;
+  vertical-align:middle;
+}
+.el-table{
+  height: 95%;
+  width: 90%;
+  display: inline-block;
+  vertical-align:middle;
+}
+
+/* 表格里面那两行 */
+.el-table__header-wrapper{
+height: 40%;
+}
+.el-table__body-wrapper{
+  height: 60%;
+}
+.el-table tr,.el-table th,.el-table td{
+  padding: 0;
+}
+
+.el-table__header,.el-table__body{
+  height: 100%;
+}
+
+.bt-container{
+display: inline-block;
+
+height: 100%;
+width: 5%;
+}
+
+.el-button{
+left: 50%;
+}
+
 </style>

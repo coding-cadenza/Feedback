@@ -10,31 +10,31 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="序号" width="100">
+      <el-table-column align="center" label="序号" width="100" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           {{ baseindex+scope.$index }}
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="客户姓名" width="100">
+      <el-table-column align="center" label="客户姓名" width="100" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           {{ scope.row.client_name }}
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="客户企业" width="100">
+      <el-table-column align="center" label="客户企业" width="100" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           {{ scope.row.client_enterprise }}
         </template>
       </el-table-column>
 
-      <el-table-column label="评价对象" width="100" align="center">
+      <el-table-column label="评价对象" width="100" align="center" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           <span>{{ scope.row.target }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="评价内容" style="table-layout:fixed;" align="left">
+      <el-table-column label="评价内容" style="table-layout:fixed;" align="left" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           {{ scope.row.content }}
         </template>
@@ -54,7 +54,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" prop="created_at" label="操作员" width="100">
+      <el-table-column align="center" prop="created_at" label="操作员" width="100" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           <span>{{ scope.row.operator }}</span>
         </template>

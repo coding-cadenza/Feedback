@@ -36,7 +36,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
-    // 如果返回code不是200，则报错,并让用户重新登陆
+    // 如果返回code不是200，
     if (res.code !== 200) {
       return Promise.reject(new Error(res.meg || 'Error'))
     }
