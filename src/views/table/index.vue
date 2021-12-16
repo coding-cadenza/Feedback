@@ -80,8 +80,9 @@
       @current-change="handleCurrentChange"
     />
     <div align="right">
-      <el-button type="primary" icon="el-icon-plus" @click="newInf()" />
-      <el-button class="create-form" type="primary" icon="el-icon-plus" @click="onCreated()" />
+      <el-button type="primary" title="保存csv" style="text-size=15px" icon="el-icon-download" />
+      <el-button type="primary" title="新表单" style="text-size=15px" icon="el-icon-s-platform" @click="newInf()" />
+      <el-button class="create-form" title="创建表单" type="primary" icon="el-icon-plus" @click="onCreated()" />
     </div>
   </div>
 </template>
@@ -165,5 +166,9 @@ export default {
 .el-image{
   width: 30%;
   height: 80%;
+}
+.el-button{
+  font-size: 25px;
+  padding: 7px,19px;
 }
 </style>
