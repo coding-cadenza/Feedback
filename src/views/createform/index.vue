@@ -88,7 +88,7 @@
                 :on-preview="handleDealImgPreview"
                 :on-remove="handleDealImgRemove"
                 :on-change="dealImgChange"
-                :file-list="form.dealImgFileList"
+
                 accept=".jpeg,.jpg,.gif,.png"
                 :limit="limitCountImg"
                 :auto-upload="false"
@@ -195,7 +195,12 @@ export default {
       } else {
         this.noneBtnImg = false
       }
-      console.log(fileList)
+      var temp = []
+      fileList.forEach(element => {
+        temp.push(element.raw)
+      })
+      this.form.dealImgFileList = temp
+
       // eslint-disable-next-line no-unused-vars
       const { imageUrl, ...data } = this.rule
       this.rule = data

@@ -15,7 +15,7 @@ const service = axios.create({
 service.interceptors.request.use(
 
   config => {
-    if (store.getters.name) {
+    if (store.getters.name !== '' && store.getters.name !== null && store.getters.name !== undefined) {
       return config
     } else {
       router.push('/login')

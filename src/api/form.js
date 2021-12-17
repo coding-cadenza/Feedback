@@ -25,15 +25,14 @@ export function GetItemById(id) {
 // 创建新item
 export function CreatItem(data) {
   var param = new FormData()
-  console.log(data.dealImgFileList)
+
   // 将图片传入
   data.dealImgFileList.forEach(
     (val, index) => {
-      param.append('image_' + (index + 1), val.raw)
+      param.append('image_' + (index + 1), val)
     }
-
   )
-  console.log(param)
+
   // 将其他字段传入
   param.append('client_name', data.client_name)
   param.append('client_enterprise', data.client_enterprise)
