@@ -41,8 +41,8 @@ export function CreatItem(data) {
 
   return request({
     url: '/api/feedback',
+    contentType: 'multipart/form-data',
     method: 'post',
-    param
-
+    data: param
   })
 }
