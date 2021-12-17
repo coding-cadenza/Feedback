@@ -31,7 +31,9 @@ export function CreatItem(data) {
     (val, index) => {
       param.append('image_' + (index + 1), val.raw)
     }
+
   )
+  console.log(param)
   // 将其他字段传入
   param.append('client_name', data.client_name)
   param.append('client_enterprise', data.client_enterprise)

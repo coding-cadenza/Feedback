@@ -53,7 +53,7 @@ const actions = {
     return new Promise(resolve => {
       // 获取头像和用户名
       commit('GET_NAME')
-      commit('GET_NAME')
+      commit('GET_AVATAR')
       resolve()
     })
   }
