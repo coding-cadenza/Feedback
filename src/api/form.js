@@ -25,7 +25,7 @@ export function GetItemById(id) {
 // 创建新item
 export function CreatItem(data) {
   var param = new FormData()
-
+  console.log(data.dealImgFileList)
   // 将图片传入
   data.dealImgFileList.forEach(
     (val, index) => {

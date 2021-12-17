@@ -9,7 +9,7 @@ export function getList(page) {
 
 export function DeleteById(id) {
   return request({
-    url: '/api/feedback/'+ id,
+    url: '/api/feedback/' + id,
     method: 'delete'
   })
 }
