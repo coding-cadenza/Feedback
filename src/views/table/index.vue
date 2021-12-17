@@ -54,13 +54,13 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" prop="created_at" label="操作员" width="100" :show-overflow-tooltip="true">
+      <el-table-column align="center" prop="created_at" label="录入员" width="100" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           <span>{{ scope.row.operator }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column align="center" prop="created_at" label="修改删除" width="200">
+      <el-table-column align="center" prop="created_at" label="操作" width="200">
         <template slot-scope="scope">
           <el-row>
             <el-button type="primary" @click="onUpdate(scope.row.feedback_id)">修改</el-button>
@@ -70,20 +70,30 @@
       </el-table-column>
 
     </el-table>
-    <el-pagination
-      display:inline-block
-      :current-page="currentpage"
-      :page-size="pagesize"
-      layout="total, prev, pager, next, jumper"
-      :total="total"
-      @current-change="handleCurrentChange"
-    />
-    <div align="right">
 
-      <el-button class="size" type="primary" title="导出反馈" style="text-size=15px" icon="el-icon-download" @click="onExportData()" />
-      <el-button class="size" type="primary" title="显示最新反馈" style="text-size=15px" icon="el-icon-s-platform" @click="onNewInf()" />
-      <el-button class="create-form size" title="创建表单" type="primary" icon="el-icon-plus" @click="onCreated()" />
+    <div class="foot-container">
+      <div class="pagination-container"><el-pagination
+        display:inline-block
+        :current-page="currentpage"
+        :page-size="pagesize"
+        layout="total, prev, pager, next, jumper"
+        :total="total"
+        @current-change="handleCurrentChange"
+      /></div>
+
+      <div class="right-bo-button-contain">
+
+        <el-button class="right-bo-button " title="创建表单" type="primary" @click="onCreated()"><svg-icon icon-class="edit" /></el-button>
+
+        <el-button class="right-bo-button " type="primary" title="显示最新反馈" style="text-size=15px" @click="onNewInf()">
+          <i class="el-icon-s-platform " /></el-button>
+
+        <el-button class="right-bo-button" type="primary" title="导出反馈" style="text-size=15px" @click="onExportData()">
+          <svg-icon icon-class="excel" />
+        </el-button>
+      </div>
     </div>
+
   </div>
 </template>
 <script>
@@ -168,17 +178,38 @@ export default {
   }
 }
 </script>
-<style >
-/* 设置鼠标移动到创建表单上边显示文字 */
-.create-form:hover::after{
+<style  scoped>
 
-}
 .el-image{
   width: 30%;
   height: 80%;
+  margin: auto;
+
 }
-.size{
-  font-size: 25px;
-  padding: 7px,19px;
+
+.img-container{
+  width: 100%;
+  height: 100%;
+}
+.pagination-container{
+display: inline-block;
+vertical-align:middle;
+}
+.right-bo-button-contain{
+display: inline-block;
+vertical-align:middle;
+float: right;
+overflow: hidden;
+}
+
+.right-bo-button-icon{
+  font-weight: 500;
+  margin: 0%;
+
+}
+
+.foot-container{
+  margin-top: 10px;
+
 }
 </style>

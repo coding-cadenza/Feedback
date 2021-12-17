@@ -8,7 +8,7 @@
     </el-carousel>
     <div class="container">
       <!-- 向左的按钮 -->
-      <div class="bt-container" @mouseenter="showButton()" @mouseleave="hideButton()"><el-button class="my-button" :class="{'hide-button': hidebutton,}" icon="el-icon-arrow-left" circle /></div>
+      <div class="bt-container" @mouseenter="showButton()" @mouseleave="hideButton()"><el-button class="my-button" :class="{'hide-button': hidebutton,}" icon="el-icon-arrow-left" circle @click="rollBack()" /></div>
       <el-table
         :data="[list[currentpage-1]]"
         border
@@ -55,13 +55,13 @@
         </el-table-column>
         <el-table-column
           prop="operator"
-          label="操作员"
+          label="录入员"
           width="100px"
           :show-overflow-tooltip="true"
         />
       </el-table>
       <!-- 向右的按钮 -->
-      <div class="bt-container" @mouseenter="showButton()" @mouseleave="hideButton()"><el-button class="my-button" :class="{'hide-button': hidebutton,}" icon="el-icon-arrow-right" circle /></div>
+      <div class="bt-container" @mouseenter="showButton()" @mouseleave="hideButton()"><el-button class="my-button" :class="{'hide-button': hidebutton,}" icon="el-icon-arrow-right" circle @click="rollForward()" /></div>
     </div>
     <div>
       <el-pagination
@@ -82,10 +82,10 @@ export default {
     return {
       currentpage: 1,
       hidebutton: true,
-      total: 5,
+      total: 0,
       pinglun: ['差劲', '一般', '良好'],
       color: ['danger', '', 'success'],
-      list: [{ captrue: [] }],
+      list: [{ captures: [] }],
       listLoading: true,
       listQuery: {
         page: 5,
@@ -95,8 +95,7 @@ export default {
   },
 
   created() {
-    this.getLatestItem() // 获取最新数据
-    // this.startTimer()// 启动计时器
+    this.getLatestItem()
   },
   destroyed() {
     this.destroyTimer() // 清除计时器
@@ -120,15 +119,18 @@ export default {
       var page = this.currentpage
       if (page === this.total) { page = 1 } else { page = page + 1 }
       this.currentpage = page
+      this.startTimer() // 重置时间
     },
     setTimer() {
-      this.timer = setInterval(this.changePage, 1000)
+      // 等轮播完所有图片就换下一个
+      console.log(this.list[this.currentpage - 1].captures.length)
+      this.timer = setInterval(this.changePage, 3000 * (this.list[this.currentpage - 1].captures.length))
     },
     getLatestItem() {
       GetLatestItem().then(res => {
         this.list = res.data.list
         this.total = this.list.length
-        console.log(this.list)
+        this.startTimer()// 启动计时器
       })
     },
     showButton() {
@@ -136,6 +138,18 @@ export default {
     },
     hideButton() {
       this.hidebutton = true
+    },
+    rollBack() {
+      var page = this.currentpage
+      if (page === 1) { page = this.total } else { page = page - 1 }
+      this.currentpage = page
+      this.startTimer() // 刷新定时器
+    },
+    rollForward() {
+      var page = this.currentpage
+      if (page === this.total) { page = 1 } else { page = page + 1 }
+      this.currentpage = page
+      this.startTimer() // 刷新定时器
     }
   }
 }
