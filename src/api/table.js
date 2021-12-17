@@ -10,7 +10,7 @@ export function getList(page) {
 export function DeleteById(id) {
   return request({
     url: '/api/feedback/{id}' + id,
-    method: 'get'
+    method: 'del'
   })
 }
 export function GetLatestItem() {

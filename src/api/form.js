@@ -29,7 +29,7 @@ export function CreatItem(data) {
   // 将图片传入
   data.dealImgFileList.forEach(
     (val, index) => {
-      param.append('image_' + index + 1, val.raw)
+      param.append('image_' + (index + 1), val.raw)
     }
   )
   // 将其他字段传入

@@ -170,7 +170,6 @@ export default {
     },
     onExportData() {
       ExportData().then(res => {
-        console.log(res.url)
         window.open(res.url)
       })
     }

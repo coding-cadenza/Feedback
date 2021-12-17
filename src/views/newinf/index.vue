@@ -1,6 +1,6 @@
 <template>
-  <div class="page-container">
-    <div :class="{'hide-div':hasfeedback}"><img src="@/assets/images/noFeedBack.png"></div>
+  <div class="page-container" :class="{'show-blank':showblank}">
+    <div class="image-container" :class="{'hide-div':hasfeedback}"><img src="@/assets/images/noFeedBack.png"></div>
     <div align="center" :class="{'hide-div':!hasfeedback}" class="roll-container">
       <el-carousel class="img-carousel" indicator-position="outside">
         <el-carousel-item v-for="capture in list[currentpage-1].captures" :key="capture">
@@ -84,6 +84,7 @@ export default {
       currentpage: 1,
       hasfeedback: false,
       hidebutton: true,
+      showblank: true,
       total: 0,
       pinglun: ['差劲', '一般', '良好'],
       color: ['danger', '', 'success'],
@@ -135,6 +136,7 @@ export default {
         if (this.total > 0) {
           this.hasfeedback = true
         }
+        this.showblank = false
         this.startTimer()// 启动计时器
       })
     },
@@ -161,6 +163,21 @@ export default {
 </script>
 
       <style scoped>
+      .show-blank{
+        display: none;
+      }
+      .image-container{
+       z-index: 1;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+      }
       .page-container{
         width: 100%;
         height: 100%;
@@ -225,18 +242,21 @@ export default {
         }
 
         /* 表格里面那两行 */
-        .el-table__header-wrapper{
+        >>>.el-table__header-wrapper{
         height: 40%;
         }
-        .el-table__body-wrapper{
+        >>>.el-table__body-wrapper{
         height: 60%;
         }
         .el-table tr,.el-table th,.el-table td{
         padding: 0;
         }
 
-        .el-table__header,.el-table__body{
+        >>>.el-table__header {
         height: 100%;
+        }
+        >>>.el-table__body{
+          height: 100%;
         }
 
         .bt-container{

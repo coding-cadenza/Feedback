@@ -198,6 +198,8 @@ export default {
       this.$refs.form.clearValidate('imageUrl')
     },
     handleDealImgRemove(file, fileList) {
+      console.log(file)
+      console.log(fileList)
       if (fileList.length >= this.limitCountImg) {
         this.noneBtnImg = true
       } else {
@@ -208,7 +210,6 @@ export default {
       }
     },
     handleDealImgPreview(file) {
-      console.log(file)
       this.dialogImageUrl = file.url
       this.dialogVisible = true
     },
