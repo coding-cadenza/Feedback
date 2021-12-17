@@ -165,12 +165,12 @@ export default {
         type: 'warning'
       }).then(() => {
         DeleteById(id).then(res => {
+          location.reload()
           this.$message({
             message: '删除成功',
             type: 'success',
             duration: 5 * 1000
           })
-          location.reload()
         })
       }).catch(() => {
       })
