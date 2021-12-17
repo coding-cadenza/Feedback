@@ -9,8 +9,8 @@ export function getList(page) {
 
 export function DeleteById(id) {
   return request({
-    url: '/api/feedback/{id}' + id,
-    method: 'del'
+    url: '/api/feedback/'+ id,
+    method: 'delete'
   })
 }
 export function GetLatestItem() {
