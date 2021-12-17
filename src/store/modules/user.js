@@ -11,7 +11,9 @@ const state = getDefaultState()
 const mutations = {
   RESET_STATE: (state) => {
     Cookies.remove('username', { path: '/api' })
-    Cookies.remove('avatar', { path: '/api' })
+    Cookies.remove('username', { path: '' })
+    Cookies.remove('username', { path: 'api' })
+    Cookies.remove('avatar', { path: 'api' })
     Object.assign(state, getDefaultState())
   },
   GET_NAME: (state) => {
