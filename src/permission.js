@@ -6,12 +6,13 @@ import 'nprogress/nprogress.css' // progress bar style
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 router.beforeEach(async(to, from, next) => {
+  console.log(store.getters.name)
   // 加载进度条
   NProgress.start()
   // 如果是到登录页面，获取name,那么直接到达table页面
   if (to.path === '/login') {
     await store.dispatch('user/login')
-    console.log(store.getters.name)
+
     if (store.getters.name) {
       next({ path: '/table' })
     } else {

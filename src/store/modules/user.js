@@ -23,10 +23,9 @@ const mutations = {
 const actions = {
   // 用户登录的时候，在调用了api后，设置用户名和头像(从cookei获取)
   login({ commit }) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       commit('GET_NAME')
       commit('GET_AVATAR')
-
       resolve()
     })
   },
@@ -36,7 +35,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       logout.then(() => {
         commit('RESET_STATE') // 将用户名和头像清空
-
         resolve()
       }).catch(error => {
         reject(error)
@@ -66,6 +64,5 @@ export default {
   state,
   mutations,
   actions
-
 }
 
