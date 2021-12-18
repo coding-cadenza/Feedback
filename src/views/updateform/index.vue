@@ -159,8 +159,7 @@ export default {
           { min: 2, max: 40, message: '长度在 2 到 40 个字符', trigger: 'change' }],
         content: [{ required: true, message: '请输入评价内容', trigger: 'blur' },
           { min: 2, max: 200, message: '长度在 2 到 200 个字符', trigger: 'change' }],
-        type: [{ required: true, message: '请点击评价性质按钮', trigger: 'change' }],
-        imageUrl: [{ required: true, message: '请提交至少一张图片', trigger: 'change' }]
+        type: [{ required: true, message: '请点击评价性质按钮', trigger: 'change' }]
       }
     }
   },
