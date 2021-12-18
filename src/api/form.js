@@ -7,20 +7,31 @@ export function GetItemById(id) {
   })
 }
 
-// export function UpdateItemById(id, item) {
-//   return request({
-//     url: '/api/feedback/' + id,
-//     method: 'put',
-//     params: {
-//         client_name:,
-//         client_enterprise:,
-//         target:,
-//         content:,
-//         type:,
-//         cap_id:,
-//     }
-//   })
-// }
+export function UpdateItemById(item) {
+  // 创建formData
+  var param = new FormData()
+  if (item.cap_id !== undefined) {
+    param.append('cap_id', item.cap_id)
+  }
+  if (item.uploadImgList !== undefined) {
+    item.uploadImgList.forEach(
+      (val, index) => {
+        param.append('image_' + (index + 1), val)
+      }
+    )
+  }
+  param.append('client_name', item.client_name)
+  param.append('client_enterprise', item.client_enterprise)
+  param.append('target', item.target)
+  param.append('content', item.content)
+  param.append('type', item.type)
+
+  return request({
+    url: '/api/feedback/' + item.feedback_id,
+    method: 'put',
+    data: param
+  })
+}
 
 // 创建新item
 export function CreatItem(data) {

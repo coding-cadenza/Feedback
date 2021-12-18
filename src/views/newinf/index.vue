@@ -31,7 +31,7 @@
           <el-table-column
             align="center"
             prop="client_enterprise"
-            label="客户企业"
+            label="反馈人身份"
             width="100px"
             :show-overflow-tooltip="true"
           />
@@ -127,7 +127,7 @@ export default {
     },
     setTimer() {
       // 等轮播完所有图片就换下一个
-      console.log(this.list[this.currentpage - 1].captures.length)
+
       this.timer = setInterval(this.changePage, 3000 * (this.list[this.currentpage - 1].captures.length))
     },
     getLatestItem() {
@@ -256,10 +256,10 @@ export default {
         height: 100%;
         width: 5%;
         }
-        .rightImg{
+        /* .rightImg{
          width: 100%;
          height: 100%;
-        }
+        } */
         .hide-button{
         visibility: hidden;
         }

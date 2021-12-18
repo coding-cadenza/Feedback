@@ -22,7 +22,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="客户企业" width="100" :show-overflow-tooltip="true">
+      <el-table-column align="center" label="反馈人身份" width="100" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           {{ scope.row.client_enterprise }}
         </template>
@@ -159,7 +159,7 @@ export default {
       this.$router.push('/newInf')
     },
     onDelete(id) {
-      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+      this.$confirm('此操作将永久删除该反馈, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
