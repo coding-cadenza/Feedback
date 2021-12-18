@@ -228,7 +228,6 @@ export default {
           if (this.uploadImgList.length > 0) {
             this.form.uploadImgList = this.uploadImgList
           }
-          this.dis = true
           UpdateItemById(this.form)
         } else {
           return false

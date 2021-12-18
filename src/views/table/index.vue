@@ -1,6 +1,6 @@
 /* eslint-disable vue/no-parsing-error */
 <template>
-  <div class="app-container">
+  <div class="app-container" style="overflow-y:auto">
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -10,12 +10,6 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="序号" width="100" :show-overflow-tooltip="true">
-        <template slot-scope="scope">
-          {{ baseindex+scope.$index }}
-        </template>
-      </el-table-column>
-
       <el-table-column align="center" label="客户姓名" width="100" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           {{ scope.row.client_name }}
@@ -33,14 +27,44 @@
           <span>{{ scope.row.target }}</span>
         </template>
       </el-table-column>
-
+      <el-table-column   label="评价时间" :render-header="renderHeader" width="180" align="center" :show-overflow-tooltip="true">
+         <template slot="header" slot-scope="scope">
+           上传时间
+            <el-dropdown @command="handleCommandBytime">
+             <span class="el-dropdown-link">
+              <i class="el-icon-arrow-down el-icon--right"></i>
+             </span>
+             <el-dropdown-menu slot="dropdown">
+               <el-dropdown-item command="asc">时间升序</el-dropdown-item>
+               <el-dropdown-item command="desc">时间降序</el-dropdown-item>
+               </el-dropdown-menu>
+            </el-dropdown>
+      </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.input_time }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="评价内容" style="table-layout:fixed;" align="left" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           {{ scope.row.content }}
         </template>
       </el-table-column>
 
-      <el-table-column class-name="status-col" label="评价等级" width="90" align="center">
+      <el-table-column class-name="status-col"   label="评价等级" width="110" align="center">
+        <template slot="header" slot-scope="scope">
+        <div> 评价等级
+       <el-dropdown @command="handleCommandBycomment">
+         <span class="el-dropdown-link">
+          <i class="el-icon-arrow-down el-icon--right"></i>
+         </span>
+         <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command='good'>良好</el-dropdown-item>
+            <el-dropdown-item command='mid'>一般</el-dropdown-item>
+            <el-dropdown-item command='bad'>差劲</el-dropdown-item>
+          </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+      </template>
         <template slot-scope="scope">
           <el-tag :type="color[scope.row.type-1]"> {{ pinglun[scope.row.type-1] }} </el-tag>
         </template>
@@ -98,6 +122,7 @@
 </template>
 <script>
 import { getList, DeleteById, ExportData } from '@/api/table'
+import { Divider } from 'element-ui'
 
 export default {
   filters: {
@@ -130,7 +155,14 @@ export default {
     this.fetchData(this.currentpage)
   },
   methods: {
-
+    handleCommandBytime(command){
+      //根据时间排序  升序command=='esc'  降序command=='desc' 
+      alert(command)
+    },
+    handleCommandBycomment(command){
+      //根据评论排序 升序command=='esc'  降序command=='desc' 
+       alert(command)
+    },
     fetchData(newPage) {
       this.listLoading = true
       getList(newPage).then(response => {
@@ -159,29 +191,31 @@ export default {
       this.$router.push('/newInf')
     },
     onDelete(id) {
-      this.$confirm('此操作将永久删除该反馈, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        DeleteById(id).then(res => {
+      console.log(this.currentpage)
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
         }).then(() => {
-          this.$message({
-            message: '删除成功',
-            type: 'success',
-            duration: 5 * 1000
-          })
+           DeleteById(id).then(res => {
+           }).then(() => {
+            this.$message({
+             message: '删除成功',
+             type: 'success',
+             duration: 5 * 1000
+            })
+          
           this.fetchData(this.currentpage)
+         this.listQuery.pagenum=this.currentpage
+          })
+        }).catch(() => {     
         })
-      }).catch(() => {
-      })
     },
     onExportData() {
       ExportData().then(res => {
         window.open(res.data)
       })
     }
-
   }
 }
 </script>
