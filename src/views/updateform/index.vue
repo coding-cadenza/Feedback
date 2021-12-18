@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="form" :rules="rule" label-width="80px" class="demo-ruleForm">
+    <el-form ref="form" :model="form" :rules="rule" label-width="95px" class="demo-ruleForm">
       <el-container>
 
         <div class="front">
@@ -247,7 +247,7 @@ export default {
   width: 120px;
 }
 .client_enterprise{
-  width:270px;
+  width:265px;
 }
 .target{
   width:480px;
@@ -275,7 +275,7 @@ export default {
   bottom: 0;
 }
 .el-card{
-  width: 620px;
+  width: 640px;
   border-radius: 4px
 
 }
