@@ -29,8 +29,8 @@ export default {
   },
   methods: {
     // await 来等待，相当于then
-    async logout() {
-      await this.$store.dispatch('user/logout')
+    logout() {
+      this.$store.dispatch('user/logout')
     }
   }
 }

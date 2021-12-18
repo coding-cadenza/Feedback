@@ -11,42 +11,42 @@ const service = axios.create({
   withCredentials: true
 })
 
-// 设置为请求前如果没有cookei.username，那么就跳到登陆界面
-service.interceptors.request.use(
+// // 设置为请求前如果没有cookei.username，那么就跳到登陆界面
+// service.interceptors.request.use(
 
-  config => {
-    if (store.getters.name !== '' && store.getters.name !== null && store.getters.name !== undefined) {
-      return config
-    } else {
-      router.push('/login')
-      return Promise.reject(new Error('Error'))
-    }
-  },
-  error => {
-    // do something with request error
-    return Promise.reject(error)
-  }
-)
+//   config => {
+//     if (store.getters.name !== '' && store.getters.name !== null && store.getters.name !== undefined) {
+//       return config
+//     } else {
+//       router.push('/login')
+//       return Promise.reject(new Error('Error'))
+//     }
+//   },
+//   error => {
+//     // do something with request error
+//     return Promise.reject(error)
+//   }
+// )
 
-// 请求后判断
-service.interceptors.response.use(
-  response => {
-    const res = response.data
-    // 如果返回code不是200，
-    if (res.code !== 200) {
-      // 这里再加一个回到登陆界面
-      return Promise.reject(new Error(res.meg || 'Error'))
-    }
-    return res
-  },
-  error => {
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
-    })
-    return Promise.reject(error)
-  }
-)
+// // 请求后判断
+// service.interceptors.response.use(
+//   response => {
+//     const res = response.data
+//     // 如果返回code不是200，
+//     if (res.code !== 200) {
+//       // 这里再加一个回到登陆界面
+//       return Promise.reject(new Error(res.meg || 'Error'))
+//     }
+//     return res
+//   },
+//   error => {
+//     Message({
+//       message: error.message,
+//       type: 'error',
+//       duration: 5 * 1000
+//     })
+//     return Promise.reject(error)
+//   }
+// )
 
 export default service
