@@ -48,9 +48,9 @@
 
       <el-table-column align="center" prop="created_at" label="反馈截图" width="200">
         <template slot-scope="scope">
-          <span v-for="capture in scope.row.captures " :key="capture">
+          <div v-for="capture in scope.row.captures " :key="capture" class="image-comtainer">
             <el-image :src="capture" :preview-src-list="[capture]" />
-          </span>
+          </div>
         </template>
       </el-table-column>
 
@@ -185,12 +185,14 @@ export default {
 }
 </script>
 <style  scoped>
-
+.app-container{
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
 .el-image{
-  width: 30%;
-  height: 80%;
-  margin: auto;
-
+  width: 100%;
+  height: 100%;
 }
 
 .img-container{
@@ -213,7 +215,13 @@ overflow: hidden;
   margin: 0%;
 
 }
-
+.image-comtainer{
+  display: inline-block;
+  vertical-align: middle;
+  width: 30%;
+  height: 30%;
+  margin-inline: 1%;
+}
 .foot-container{
   margin-top: 10px;
 

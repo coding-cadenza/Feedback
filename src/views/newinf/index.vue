@@ -1,7 +1,7 @@
 <template>
-  <div class="page-container" :class="{'show-blank':showblank}">
-    <div class="image-container" :class="{'hide-div':hasfeedback}"><img src="@/assets/images/noFeedBack.png"></div>
-    <div align="center" :class="{'hide-div':!hasfeedback}" class="roll-container">
+  <div class="page-container">
+    <div align="center" :class="{'hide-img' : hasfeedback}" class="img-container"><img src="@/assets/images/noFeedBack.png"></div>
+    <div v-if="total>0" align="center" :class="{'hide-page':hasnofeedback}" class="roll-container">
       <el-carousel class="img-carousel" indicator-position="outside">
         <el-carousel-item v-for="capture in list[currentpage-1].captures" :key="capture">
           <img :src="capture" class="rightImg">
@@ -75,6 +75,7 @@
       </div>
     </div>
   </div>
+
 </template>
 <script>
 import { GetLatestItem } from '@/api/table'
@@ -82,13 +83,13 @@ export default {
   data() {
     return {
       currentpage: 1,
-      hasfeedback: false,
+      hasfeedback: true,
+      hasnofeedback: true,
       hidebutton: true,
-      showblank: true,
       total: 0,
       pinglun: ['差劲', '一般', '良好'],
       color: ['danger', '', 'success'],
-      list: [{ captures: [] }],
+      list: [],
       listLoading: true,
       listQuery: {
         page: 5,
@@ -134,10 +135,11 @@ export default {
         this.list = res.data.list
         this.total = this.list.length
         if (this.total > 0) {
-          this.hasfeedback = true
+          this.hasnofeedback = false
+          this.startTimer()// 启动计时器
+        } else {
+          this.hasfeedback = !this.hasfeedback
         }
-        this.showblank = false
-        this.startTimer()// 启动计时器
       })
     },
     showButton() {
@@ -163,21 +165,7 @@ export default {
 </script>
 
       <style scoped>
-      .show-blank{
-        display: none;
-      }
-      .image-container{
-       z-index: 1;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #ffffff;
-      }
+
       .page-container{
         width: 100%;
         height: 100%;
@@ -194,6 +182,10 @@ export default {
         height: 100%;
         width: 100%;
         overflow: hidden;
+        }
+        .img-container{
+          height: 100%;
+          width: 100%;
         }
 
         .el-pagination{
@@ -264,11 +256,17 @@ export default {
         height: 100%;
         width: 5%;
         }
-
+        .rightImg{
+         width: 100%;
+         height: 100%;
+        }
         .hide-button{
         visibility: hidden;
         }
-        .hide-div{
+        .hide-img{
+          display: none;
+        }
+        .hide-page{
           display: none;
         }
       </style>
