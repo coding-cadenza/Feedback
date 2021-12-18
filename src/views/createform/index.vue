@@ -24,11 +24,11 @@
               </el-form-item>
             </el-col>
             <el-col :span="10">
-              <el-form-item label="客户企业" prop="client_enterprise">
+              <el-form-item label="反馈人身份" prop="client_enterprise">
                 <el-input
                   v-model="form.client_enterprise"
                   class="client_enterprise"
-                  placeholder="客户企业..."
+                  placeholder="反馈人身份..."
                   onchange="this.value=this.value.substring(0, 20)"
                   onkeydown="this.value=this.value.substring(0, 20)"
                   onkeyup="this.value=this.value.substring(0, 20)"
@@ -148,7 +148,7 @@ export default {
       rule: {
         client_name: [
           { required: true, message: '请输入客户姓名', trigger: 'blur' },
-          { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' },
+          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' },
           {
             required: true,
             pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/,
@@ -156,8 +156,8 @@ export default {
             trigger: 'blur'
           }
         ],
-        client_enterprise: [{ required: true, message: '请输入客户企业', trigger: 'blur' },
-          { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' },
+        client_enterprise: [{ required: true, message: '请输入反馈人身份', trigger: 'blur' },
+          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' },
           {
             required: true,
             pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/,
@@ -165,7 +165,7 @@ export default {
             trigger: 'blur'
           }],
         target: [{ required: true, message: '请输入评价对象', trigger: 'blur' },
-          { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' },
+          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' },
           {
             required: true,
             pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/,
