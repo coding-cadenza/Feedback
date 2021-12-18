@@ -109,7 +109,11 @@
           <el-form-item>
             <el-row :gutter="20">
               <el-col :span="6">
-                <el-button type="primary" @click="onSubmit('form')">创建表单</el-button>
+                <el-button
+                  type="primary"
+                  :disabled="submitLoading"
+                  @click="onSubmit('form')"
+                >{{ submitLoading ? '处理中...' : '确定' }}</el-button>
               </el-col>
               <el-col :span="6">
                 <el-button @click="onCancel('form')">返回</el-button>
@@ -136,6 +140,7 @@ export default {
       dialogImageUrl: '',
       dialogVisible: false,
       limitCountImg: 3,
+      submitLoading: false, // 设置创建表单按钮的属性
       form: {
         client_name: '',
         client_enterprise: '',
@@ -211,7 +216,9 @@ export default {
               message: '创建成功',
               type: 'success',
               duration: 5 * 1000
-            })
+            },
+            this.submitLoading = true
+            )
             this.$router.push('/table')
           })
         } else {
