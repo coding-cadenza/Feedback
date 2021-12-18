@@ -138,6 +138,8 @@ export default {
       dialogVisible: false,
       dealImgFileList: [],
       limitCountImg: 3,
+      cap_id: [], // 要删除的id
+      uploadImgList: [], // 要上传的图片
       form: {
         feedback_id: '',
         client_name: '',
@@ -148,6 +150,7 @@ export default {
         operator: '',
         captures: [],
         input_time: ''
+
       },
       rule: {
         client_name: [
@@ -192,14 +195,20 @@ export default {
       } else {
         this.noneBtnImg = false
       }
-      // eslint-disable-next-line no-unused-vars
+
       const { imageUrl, ...data } = this.rule
       this.rule = data
       this.$refs.form.clearValidate('imageUrl')
+      var temp = []
+      // 将图片放入list(本来有的不放)
+      fileList.forEach(element => {
+        if (element.raw !== undefined) {
+          temp.push(element.raw)
+        }
+      })
+      this.uploadImgList = temp
     },
     handleDealImgRemove(file, fileList) {
-      console.log(file)
-      console.log(fileList)
       if (fileList.length >= this.limitCountImg) {
         this.noneBtnImg = true
       } else {
@@ -208,7 +217,13 @@ export default {
       if (fileList.length === 0) {
         this.rule.imageUrl = [{ required: true, message: '请上传至少一张图片', trigger: 'change' }]
       }
+      // 如果是本来有的图片，就要删掉
+
+      if (file.cap_id !== undefined) {
+        this.cap_id.push(file.cap_id)
+      }
     },
+
     handleDealImgPreview(file) {
       this.dialogImageUrl = file.url
       this.dialogVisible = true
@@ -218,6 +233,12 @@ export default {
         // eslint-disable-next-line eqeqeq
         if (valid) {
           // 更新表单
+          if (this.cap_id.length > 0) {
+            this.form.cap_id = this.cap_id // 加入要删除的图片id
+          }
+          if (this.uploadImgList.length > 0) {
+            this.form.uploadImgList = this.uploadImgList
+          }
           UpdateItemById(this.form)
         } else {
           return false
@@ -238,7 +259,7 @@ export default {
       var dealImgFileList = this.dealImgFileList
       this.form.captures.forEach(
         (val, index) => {
-          dealImgFileList.push({ url: val.image })
+          dealImgFileList.push({ url: val.image, cap_id: val.cap_id })
         }
       )
       if (this.form.captures.length >= this.limitCountImg) {
