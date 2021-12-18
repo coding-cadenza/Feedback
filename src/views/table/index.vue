@@ -1,6 +1,6 @@
 /* eslint-disable vue/no-parsing-error */
 <template>
-  <div class="app-container">
+  <div class="app-container" style="overflow-y:auto">
     <el-table
       v-loading="listLoading"
       :data="list"
