@@ -35,7 +35,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       logout().then(() => {
         commit('RESET_STATE') // 将用户名和头像清空
-        // resolve()
+        resolve()
       }).catch(error => {
         reject(error)
       })

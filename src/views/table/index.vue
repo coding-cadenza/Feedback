@@ -17,7 +17,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="客户企业" width="100" :show-overflow-tooltip="true">
+      <el-table-column align="center" label="反馈人身份" width="100" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           {{ scope.row.client_enterprise }}
         </template>

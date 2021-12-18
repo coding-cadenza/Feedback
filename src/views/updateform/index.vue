@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="form" :rules="rule" label-width="80px" class="demo-ruleForm">
+    <el-form ref="form" :model="form" :rules="rule" label-width="95px" class="demo-ruleForm">
       <el-container>
 
         <div class="front">
@@ -30,9 +30,9 @@
                     v-model="form.client_enterprise"
                     class="client_enterprise"
                     placeholder="反馈人身份..."
-                    onchange="this.value=this.value.substring(0, 20)"
-                    onkeydown="this.value=this.value.substring(0, 20)"
-                    onkeyup="this.value=this.value.substring(0, 20)"
+                    onchange="this.value=this.value.substring(0, 30)"
+                    onkeydown="this.value=this.value.substring(0, 30)"
+                    onkeyup="this.value=this.value.substring(0, 30)"
                   />
                 </el-form-item>
               </el-col>
@@ -43,9 +43,9 @@
                   v-model="form.target"
                   class="target"
                   placeholder="评价对象..."
-                  onchange="this.value=this.value.substring(0, 20)"
-                  onkeydown="this.value=this.value.substring(0, 20)"
-                  onkeyup="this.value=this.value.substring(0, 20)"
+                  onchange="this.value=this.value.substring(0, 40)"
+                  onkeydown="this.value=this.value.substring(0, 40)"
+                  onkeyup="this.value=this.value.substring(0, 40)"
                 />
               </el-form-item>
             </el-row>
@@ -138,6 +138,8 @@ export default {
       dialogVisible: false,
       dealImgFileList: [],
       limitCountImg: 3,
+      cap_id: [], // 要删除的id
+      uploadImgList: [], // 要上传的图片
       form: {
         feedback_id: '',
         client_name: '',
@@ -148,36 +150,18 @@ export default {
         operator: '',
         captures: [],
         input_time: ''
+
       },
       rule: {
         client_name: [
           { required: true, message: '请输入客户姓名', trigger: 'blur' },
-          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' },
-          {
-            required: true,
-            pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/,
-            message: '姓名不支持特殊字符',
-            trigger: 'blur'
-          }
-        ],
+          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'change' }],
         client_enterprise: [{ required: true, message: '请输入反馈人身份', trigger: 'blur' },
-          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' },
-          {
-            required: true,
-            pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/,
-            message: '活动名称不支持特殊字符',
-            trigger: 'blur'
-          }],
+          { min: 2, max: 30, message: '长度在 2 到 30 个字符', trigger: 'change' }],
         target: [{ required: true, message: '请输入评价对象', trigger: 'blur' },
-          { min: 2, max: 200, message: '长度在 2 到 20 个字符', trigger: 'blur' },
-          {
-            required: true,
-            pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/,
-            message: '评价对象不支持特殊字符',
-            trigger: 'blur'
-          }],
+          { min: 2, max: 40, message: '长度在 2 到 40 个字符', trigger: 'change' }],
         content: [{ required: true, message: '请输入评价内容', trigger: 'blur' },
-          { min: 2, max: 200, message: '长度在 2 到 200 个字符', trigger: 'blur' }],
+          { min: 2, max: 200, message: '长度在 2 到 200 个字符', trigger: 'change' }],
         type: [{ required: true, message: '请点击评价性质按钮', trigger: 'change' }]
       }
     }
@@ -192,14 +176,20 @@ export default {
       } else {
         this.noneBtnImg = false
       }
-      // eslint-disable-next-line no-unused-vars
+
       const { imageUrl, ...data } = this.rule
       this.rule = data
       this.$refs.form.clearValidate('imageUrl')
+      var temp = []
+      // 将图片放入list(本来有的不放)
+      fileList.forEach(element => {
+        if (element.raw !== undefined) {
+          temp.push(element.raw)
+        }
+      })
+      this.uploadImgList = temp
     },
     handleDealImgRemove(file, fileList) {
-      console.log(file)
-      console.log(fileList)
       if (fileList.length >= this.limitCountImg) {
         this.noneBtnImg = true
       } else {
@@ -208,7 +198,13 @@ export default {
       if (fileList.length === 0) {
         this.rule.imageUrl = [{ required: true, message: '请上传至少一张图片', trigger: 'change' }]
       }
+      // 如果是本来有的图片，就要删掉
+
+      if (file.cap_id !== undefined) {
+        this.cap_id.push(file.cap_id)
+      }
     },
+
     handleDealImgPreview(file) {
       this.dialogImageUrl = file.url
       this.dialogVisible = true
@@ -218,6 +214,12 @@ export default {
         // eslint-disable-next-line eqeqeq
         if (valid) {
           // 更新表单
+          if (this.cap_id.length > 0) {
+            this.form.cap_id = this.cap_id // 加入要删除的图片id
+          }
+          if (this.uploadImgList.length > 0) {
+            this.form.uploadImgList = this.uploadImgList
+          }
           UpdateItemById(this.form)
         } else {
           return false
@@ -238,7 +240,7 @@ export default {
       var dealImgFileList = this.dealImgFileList
       this.form.captures.forEach(
         (val, index) => {
-          dealImgFileList.push({ url: val.image })
+          dealImgFileList.push({ url: val.image, cap_id: val.cap_id })
         }
       )
       if (this.form.captures.length >= this.limitCountImg) {
@@ -265,7 +267,7 @@ export default {
   width: 120px;
 }
 .client_enterprise{
-  width:270px;
+  width:265px;
 }
 .target{
   width:480px;
@@ -293,7 +295,7 @@ export default {
   bottom: 0;
 }
 .el-card{
-  width: 620px;
+  width: 640px;
   border-radius: 4px
 
 }
