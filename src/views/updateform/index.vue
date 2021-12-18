@@ -111,10 +111,16 @@
             <el-form-item>
               <el-row :gutter="20">
                 <el-col :span="6">
-                  <el-button type="primary" @click="onSubmit('form')">确认修改</el-button>
+                  <el-button
+                    type="primary"
+                    :disabled="submitLoading"
+                    @click="onSubmit('form')"
+                  >{{ submitLoading ? '处理中...' : '确认修改' }}</el-button>
                 </el-col>
                 <el-col :span="6">
-                  <el-button @click="onCancel('form')">返回</el-button>
+                  <el-button
+                    @click="onCancel('form')"
+                  >返回</el-button>
                 </el-col>
               </el-row>
             </el-form-item>
@@ -140,6 +146,7 @@ export default {
       limitCountImg: 3,
       cap_id: [], // 要删除的id
       uploadImgList: [], // 要上传的图片
+      submitLoading: false, // 设置更新表单按钮的属性
       form: {
         feedback_id: '',
         client_name: '',
@@ -213,6 +220,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         // eslint-disable-next-line eqeqeq
         if (valid) {
+          this.submitLoading = true
           // 更新表单
           if (this.cap_id.length > 0) {
             this.form.cap_id = this.cap_id // 加入要删除的图片id
@@ -220,6 +228,7 @@ export default {
           if (this.uploadImgList.length > 0) {
             this.form.uploadImgList = this.uploadImgList
           }
+          this.dis = true
           UpdateItemById(this.form)
         } else {
           return false

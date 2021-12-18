@@ -5,8 +5,8 @@ import router from '@/router'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'https://ipandai.club', // 在服务器上用这个
-  // baseURL: 'http://127.0.0.1:4523/mock/401326/',
+ // baseURL: 'https://ipandai.club', // 在服务器上用这个
+  baseURL: 'http://127.0.0.1:4523/mock/401326/',
   timeout: 5000, // request timeout
   withCredentials: true
 })
