@@ -30,9 +30,9 @@
                     v-model="form.client_enterprise"
                     class="client_enterprise"
                     placeholder="反馈人身份..."
-                    onchange="this.value=this.value.substring(0, 20)"
-                    onkeydown="this.value=this.value.substring(0, 20)"
-                    onkeyup="this.value=this.value.substring(0, 20)"
+                    onchange="this.value=this.value.substring(0, 30)"
+                    onkeydown="this.value=this.value.substring(0, 30)"
+                    onkeyup="this.value=this.value.substring(0, 30)"
                   />
                 </el-form-item>
               </el-col>
@@ -43,9 +43,9 @@
                   v-model="form.target"
                   class="target"
                   placeholder="评价对象..."
-                  onchange="this.value=this.value.substring(0, 20)"
-                  onkeydown="this.value=this.value.substring(0, 20)"
-                  onkeyup="this.value=this.value.substring(0, 20)"
+                  onchange="this.value=this.value.substring(0, 40)"
+                  onkeydown="this.value=this.value.substring(0, 40)"
+                  onkeyup="this.value=this.value.substring(0, 40)"
                 />
               </el-form-item>
             </el-row>
@@ -152,33 +152,15 @@ export default {
       rule: {
         client_name: [
           { required: true, message: '请输入客户姓名', trigger: 'blur' },
-          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' },
-          {
-            required: true,
-            pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/,
-            message: '姓名不支持特殊字符',
-            trigger: 'blur'
-          }
-        ],
+          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'change' }],
         client_enterprise: [{ required: true, message: '请输入反馈人身份', trigger: 'blur' },
-          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' },
-          {
-            required: true,
-            pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/,
-            message: '活动名称不支持特殊字符',
-            trigger: 'blur'
-          }],
+          { min: 2, max: 30, message: '长度在 2 到 30 个字符', trigger: 'change' }],
         target: [{ required: true, message: '请输入评价对象', trigger: 'blur' },
-          { min: 2, max: 200, message: '长度在 2 到 20 个字符', trigger: 'blur' },
-          {
-            required: true,
-            pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/,
-            message: '评价对象不支持特殊字符',
-            trigger: 'blur'
-          }],
+          { min: 2, max: 40, message: '长度在 2 到 40 个字符', trigger: 'change' }],
         content: [{ required: true, message: '请输入评价内容', trigger: 'blur' },
-          { min: 2, max: 200, message: '长度在 2 到 200 个字符', trigger: 'blur' }],
-        type: [{ required: true, message: '请点击评价性质按钮', trigger: 'change' }]
+          { min: 2, max: 200, message: '长度在 2 到 200 个字符', trigger: 'change' }],
+        type: [{ required: true, message: '请点击评价性质按钮', trigger: 'change' }],
+        imageUrl: [{ required: true, message: '请提交至少一张图片', trigger: 'change' }]
       }
     }
   },
