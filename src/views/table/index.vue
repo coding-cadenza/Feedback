@@ -5,7 +5,6 @@
       v-loading="listLoading"
       :data="list"
       style="width:100%"
-      height='92%'
       element-loading-text="Loading"
       border
       fit
