@@ -122,7 +122,6 @@
 </template>
 <script>
 import { getList, DeleteById, ExportData } from '@/api/table'
-import { Divider } from 'element-ui'
 
 export default {
   filters: {
@@ -208,7 +207,6 @@ export default {
           })
 
           this.fetchData(this.currentpage)
-          this.listQuery.pagenum = this.currentpage
         })
       }).catch(() => {
       })
