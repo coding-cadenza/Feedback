@@ -206,7 +206,7 @@ export default {
             type: 'success',
             duration: 5 * 1000
           })
-          if (this.total % this.pagesize === 1) {
+          if (this.total % this.pagesize === 1 && this.currentpage === (Math.floor(this.total / this.pagesize) + 1)) {
             if (this.currentpage > 1) { this.currentpage-- }
           }
 
