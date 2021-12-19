@@ -16,7 +16,7 @@ service.interceptors.request.use(
 
   config => {
     const hasusername = store.getters.name
-    if (hasusername !== '' && hasusername !== null && hasusername !== undefined) {
+    if (hasusername) {
       return config
     } else {
       router.push('/login')
