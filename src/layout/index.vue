@@ -21,9 +21,8 @@ export default {
 }
 </script>
 <style scoped>
-.main-container{
-margin-left: 10px;
-margin-right: 10px;
+.app-wrapper{
+
 }
 </style>
 

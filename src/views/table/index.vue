@@ -1,6 +1,6 @@
 /* eslint-disable vue/no-parsing-error */
 <template>
-  <div class="app-container" style="overflow-y:auto">
+  <div class="table-container" style="overflow-y:auto" :class="{'hide-index':hideindex}">
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -137,6 +137,7 @@ export default {
   },
   data() {
     return {
+      hideindex: true,
       baseindex: '',
       pagesize: 20,
       currentpage: 1,
@@ -170,6 +171,7 @@ export default {
         this.total = response.data.count
         this.listLoading = false
         this.baseindex = (newPage - 1) * this.pagesize
+        this.hideindex = false
       })
     },
 
@@ -219,11 +221,16 @@ export default {
   }
 }
 </script>
-<style  scoped>
-.app-container{
-  width: 100%;
+<style  >
+.hide-index{
+  display: none;
+}
+.table-container{
+  width: 90%;
   height: 100%;
-  overflow: auto;
+  margin: auto;
+  overflow: hidden;
+
 }
 .el-image{
   width: 100%;
@@ -259,6 +266,5 @@ overflow: hidden;
 }
 .foot-container{
   margin-top: 10px;
-
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="overflow:hidden">
+  <div id="app" class="app">
     <router-view />
   </div>
 </template>
@@ -9,3 +9,10 @@ export default {
   name: 'App'
 }
 </script>
+<style  scoped>
+
+.app{
+overflow-y: overlay;
+}
+</style>
+
