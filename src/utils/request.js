@@ -16,6 +16,7 @@ service.interceptors.request.use(
 
   config => {
     const hasusername = store.getters.name
+    console.log(hasusername)
     if (hasusername) {
       return config
     } else {
