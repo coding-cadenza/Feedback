@@ -9,7 +9,7 @@ router.beforeEach(async(to, from, next) => {
   // 加载进度条
   NProgress.start()
   const hasusername = store.getters.name
-  if (hasusername !== '' && hasusername !== null && hasusername !== undefined) {
+  if (hasusername !== '' || hasusername !== null || hasusername !== undefined) {
     await store.dispatch('user/getUserInfo')
   }
   if (to.path === '/login') {
