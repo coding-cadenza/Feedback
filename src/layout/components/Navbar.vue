@@ -9,7 +9,7 @@
       </div>
       <div class="user-name-logout">
         <div class="user-name">{{ name }}</div>
-        <div class="log-out"><a href="" @click="logout()">退出登录</a></div>
+        <a href="" @click="logout()">退出登录</a>
 
       </div>
 
