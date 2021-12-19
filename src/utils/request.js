@@ -33,6 +33,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
+    console.log(res)
     // 如果返回code不是200，
     if (res.code !== 200) {
       // 这里再加一个回到登陆界面
