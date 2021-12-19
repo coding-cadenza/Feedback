@@ -1,6 +1,6 @@
 /* eslint-disable vue/no-parsing-error */
 <template>
-  <div class="app-container" style="overflow-y:auto">
+  <div class="table-container" style="overflow-y:auto" :class="{'hide-index':hideindex}">
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -27,19 +27,19 @@
           <span>{{ scope.row.target }}</span>
         </template>
       </el-table-column>
-      <el-table-column   label="评价时间" :render-header="renderHeader" width="180" align="center" :show-overflow-tooltip="true">
-         <template slot="header" slot-scope="scope">
-           上传时间
-            <el-dropdown @command="handleCommandBytime">
-             <span class="el-dropdown-link">
-              <i class="el-icon-arrow-down el-icon--right"></i>
-             </span>
-             <el-dropdown-menu slot="dropdown">
-               <el-dropdown-item command="asc">时间升序</el-dropdown-item>
-               <el-dropdown-item command="desc">时间降序</el-dropdown-item>
-               </el-dropdown-menu>
-            </el-dropdown>
-      </template>
+      <el-table-column label="评价时间" :render-header="renderHeader" width="180" align="center" :show-overflow-tooltip="true">
+        <template slot="header" slot-scope="scope">
+          上传时间
+          <el-dropdown @command="handleCommandBytime">
+            <span class="el-dropdown-link">
+              <i class="el-icon-arrow-down el-icon--right" />
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="asc">时间升序</el-dropdown-item>
+              <el-dropdown-item command="desc">时间降序</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </template>
         <template slot-scope="scope">
           <span>{{ scope.row.input_time }}</span>
         </template>
@@ -50,21 +50,21 @@
         </template>
       </el-table-column>
 
-      <el-table-column class-name="status-col"   label="评价等级" width="110" align="center">
+      <el-table-column class-name="status-col" label="评价等级" width="110" align="center">
         <template slot="header" slot-scope="scope">
-        <div> 评价等级
-       <el-dropdown @command="handleCommandBycomment">
-         <span class="el-dropdown-link">
-          <i class="el-icon-arrow-down el-icon--right"></i>
-         </span>
-         <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command='good'>良好</el-dropdown-item>
-            <el-dropdown-item command='mid'>一般</el-dropdown-item>
-            <el-dropdown-item command='bad'>差劲</el-dropdown-item>
-          </el-dropdown-menu>
-          </el-dropdown>
-        </div>
-      </template>
+          <div> 评价等级
+            <el-dropdown @command="handleCommandBycomment">
+              <span class="el-dropdown-link">
+                <i class="el-icon-arrow-down el-icon--right" />
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="good">良好</el-dropdown-item>
+                <el-dropdown-item command="mid">一般</el-dropdown-item>
+                <el-dropdown-item command="bad">差劲</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </template>
         <template slot-scope="scope">
           <el-tag :type="color[scope.row.type-1]"> {{ pinglun[scope.row.type-1] }} </el-tag>
         </template>
@@ -137,6 +137,7 @@ export default {
   },
   data() {
     return {
+      hideindex: true,
       baseindex: '',
       pagesize: 20,
       currentpage: 1,
@@ -155,13 +156,13 @@ export default {
     this.fetchData(this.currentpage)
   },
   methods: {
-    handleCommandBytime(command){
-      //根据时间排序  升序command=='esc'  降序command=='desc' 
+    handleCommandBytime(command) {
+      // 根据时间排序  升序command=='esc'  降序command=='desc'
       alert(command)
     },
-    handleCommandBycomment(command){
-      //根据评论排序 升序command=='esc'  降序command=='desc' 
-       alert(command)
+    handleCommandBycomment(command) {
+      // 根据评论排序 升序command=='esc'  降序command=='desc'
+      alert(command)
     },
     fetchData(newPage) {
       this.listLoading = true
@@ -170,6 +171,7 @@ export default {
         this.total = response.data.count
         this.listLoading = false
         this.baseindex = (newPage - 1) * this.pagesize
+        this.hideindex = false
       })
     },
 
@@ -192,24 +194,24 @@ export default {
     },
     onDelete(id) {
       console.log(this.currentpage)
-        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        DeleteById(id).then(res => {
         }).then(() => {
-           DeleteById(id).then(res => {
-           }).then(() => {
-            this.$message({
-             message: '删除成功',
-             type: 'success',
-             duration: 5 * 1000
-            })
-          
-          this.fetchData(this.currentpage)
-         this.listQuery.pagenum=this.currentpage
+          this.$message({
+            message: '删除成功',
+            type: 'success',
+            duration: 5 * 1000
           })
-        }).catch(() => {     
+
+          this.fetchData(this.currentpage)
+          this.listQuery.pagenum = this.currentpage
         })
+      }).catch(() => {
+      })
     },
     onExportData() {
       ExportData().then(res => {
@@ -219,11 +221,16 @@ export default {
   }
 }
 </script>
-<style  scoped>
-.app-container{
-  width: 100%;
+<style  >
+.hide-index{
+  display: none;
+}
+.table-container{
+  width: 90%;
   height: 100%;
-  overflow: auto;
+  margin: auto;
+  overflow: hidden;
+
 }
 .el-image{
   width: 100%;
@@ -259,6 +266,5 @@ overflow: hidden;
 }
 .foot-container{
   margin-top: 10px;
-
 }
 </style>

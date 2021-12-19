@@ -48,6 +48,7 @@ export default {
     float: right;
     height: 100%;
     width: 140px;
+    margin-right: 10px;
 
     .avatar-container {
       margin-right: 10px;
