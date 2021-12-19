@@ -100,7 +100,9 @@
                       avatar-uploader-icon"
                 />
               </el-upload>
-              <el-dialog :visible.sync="dialogVisible">
+              <el-dialog
+                :visible.sync="dialogVisible"
+              >
                 <img width="100%" :src="dialogImageUrl" alt="">
               </el-dialog>
             </el-form-item>
@@ -175,7 +177,7 @@ export default {
   },
 
   methods: {
-    dealImgChange(file, fileList) {
+    dealImgChange(_file, fileList) {
       if (fileList.length >= this.limitCountImg) {
         this.noneBtnImg = true
       } else {
@@ -192,7 +194,7 @@ export default {
       this.rule = data
       this.$refs.form.clearValidate('imageUrl')
     },
-    handleDealImgRemove(file, fileList) {
+    handleDealImgRemove(_file, fileList) {
       if (fileList.length >= this.limitCountImg) {
         this.noneBtnImg = true
       } else {
@@ -211,16 +213,18 @@ export default {
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          CreatItem(this.form).then(res => {
-            this.$message({
-              message: '创建成功',
-              type: 'success',
-              duration: 5 * 1000
-            },
-            this.submitLoading = true
-            )
-            this.$router.push('/table')
-          })
+          this.submitLoading = true
+          try {
+            CreatItem(this.form).then(_res => {
+              this.$message({
+                message: '创建成功',
+                type: 'success',
+                duration: 5 * 1000
+              }
+              )
+              this.$router.push('/table')
+            })
+          } catch (err) { this.submitLoading = false }
         } else {
           return false
         }

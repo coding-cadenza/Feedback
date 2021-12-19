@@ -96,11 +96,13 @@
                   :limit="limitCountImg"
                   :auto-upload="false"
                 >
-                  <i
-                    slot="default"
-                    class="el-icon-plus
+                  <div id="preview">
+                    <span><i
+                      slot="default"
+                      class="el-icon-plus
                       avatar-uploader-icon"
-                  />
+                    /></span>
+                  </div>
                 </el-upload>
                 <el-dialog :visible.sync="dialogVisible">
                   <img width="100%" :src="dialogImageUrl" alt="">
@@ -177,7 +179,7 @@ export default {
     this.GetItemById(this.$route.params.id)
   },
   methods: {
-    dealImgChange(file, fileList) {
+    dealImgChange(_file, fileList) {
       if (fileList.length >= this.limitCountImg) {
         this.noneBtnImg = true
       } else {
@@ -228,13 +230,23 @@ export default {
           if (this.uploadImgList.length > 0) {
             this.form.uploadImgList = this.uploadImgList
           }
-          UpdateItemById(this.form)
+          try {
+            UpdateItemById(this.form).then(_res => {
+              this.$message({
+                message: '修改成功',
+                type: 'success',
+                duration: 5 * 1000
+              }
+              )
+              this.$router.push('/table')
+            })
+          } catch (err) { this.submitLoading = false }
         } else {
           return false
         }
       })
     },
-    onCancel(formName) {
+    onCancel(_formName) {
       this.$router.push('/table')
     },
     GetItemById(id) {
@@ -247,7 +259,7 @@ export default {
     setDealImgFileList() {
       var dealImgFileList = this.dealImgFileList
       this.form.captures.forEach(
-        (val, index) => {
+        (val, _index) => {
           dealImgFileList.push({ url: val.image, cap_id: val.cap_id })
         }
       )
