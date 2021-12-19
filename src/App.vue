@@ -12,9 +12,7 @@ export default {
 <style  scoped>
 
 .app{
-
-overflow: hidden;
-
+overflow-y: overlay;
 }
 </style>
 

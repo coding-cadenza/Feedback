@@ -21,9 +21,8 @@ export default {
 }
 </script>
 <style scoped>
-.main-container{
+.app-wrapper{
 
-overflow-y: overlay;
 }
 </style>
 
