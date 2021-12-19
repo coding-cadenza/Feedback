@@ -230,23 +230,23 @@ export default {
           if (this.uploadImgList.length > 0) {
             this.form.uploadImgList = this.uploadImgList
           }
-          try {
-            UpdateItemById(this.form).then(_res => {
-              this.$message({
-                message: '修改成功',
-                type: 'success',
-                duration: 5 * 1000
-              }
-              )
-              this.$router.push('/table')
+
+          UpdateItemById(this.form).then(res => {
+            this.$message({
+              message: '修改成功',
+              type: 'success',
+              duration: 2 * 1000
             })
-          } catch (err) { this.submitLoading = false }
+            this.$router.push('/table')
+          }).catch(() => {
+            this.submitLoading = false
+          })
         } else {
           return false
         }
       })
     },
-    onCancel(_formName) {
+    onCancel(formName) {
       this.$router.push('/table')
     },
     GetItemById(id) {

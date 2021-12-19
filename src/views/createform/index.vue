@@ -219,7 +219,7 @@ export default {
               this.$message({
                 message: '创建成功',
                 type: 'success',
-                duration: 5 * 1000
+                duration: 2 * 1000
               }
               )
               this.$router.push('/table')
