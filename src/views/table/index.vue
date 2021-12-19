@@ -176,6 +176,7 @@ export default {
 
     handleCurrentChange(newPage) {
       this.listQuery.pagenum = newPage
+      this.currentpage = newPage
       this.fetchData(newPage)
       // 回到顶部
       document.body.scrollTop = 0
@@ -205,6 +206,9 @@ export default {
             type: 'success',
             duration: 5 * 1000
           })
+          if (this.total % this.pagesize === 1) {
+            if (this.currentpage > 1) { this.currentpage-- }
+          }
 
           this.fetchData(this.currentpage)
         })
