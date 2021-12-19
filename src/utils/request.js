@@ -16,7 +16,6 @@ service.interceptors.request.use(
 
   config => {
     const hasusername = store.getters.name
-    console.log(hasusername)
     if (hasusername) {
       return config
     } else {
@@ -45,7 +44,7 @@ service.interceptors.response.use(
   },
   error => {
     Message({
-      message: error.message,
+      message: error.msg,
       type: 'error',
       duration: 5 * 1000
     })
