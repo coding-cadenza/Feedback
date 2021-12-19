@@ -8,20 +8,26 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 router.beforeEach(async(to, from, next) => {
   // 加载进度条
   NProgress.start()
-  await store.dispatch('user/getUserInfo')
-  const hasusername = store.getters.name
 
+  const hasusername = store.getters.name
+  if (!hasusername) {
+    await store.dispatch('user/getUserInfo')
+  }
   if (to.path === '/login') {
-    if (hasusername) {
+    if (store.getters.name) {
       next({ path: '/table' })
+      NProgress.done()
     } else {
       next()
+      NProgress.done()
     }
   } else {
-    if (hasusername) {
+    if (store.getters.name) {
       next()
+      NProgress.done()
     } else {
       next({ path: '/login' })
+      NProgress.done()
     }
   }
 })
