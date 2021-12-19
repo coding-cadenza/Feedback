@@ -15,7 +15,8 @@ const service = axios.create({
 service.interceptors.request.use(
 
   config => {
-    if (store.getters.name !== '' && store.getters.name !== null && store.getters.name !== undefined) {
+    const hasusername = store.getters.name
+    if (hasusername !== '' && hasusername !== null && hasusername !== undefined) {
       return config
     } else {
       router.push('/login')
@@ -36,8 +37,9 @@ service.interceptors.response.use(
     if (res.code !== 200) {
       // 这里再加一个回到登陆界面
       return Promise.reject(new Error(res.meg || 'Error'))
+    } else {
+      return res
     }
-    return res
   },
   error => {
     Message({
