@@ -1,9 +1,14 @@
 import request from '@/utils/request'
 
-export function getList(page) {
+export function getList(feachparams) {
   return request({
-    url: '/api/feedback/list/' + page,
-    method: 'get'
+    url: '/api/feedback/list/' + feachparams.page,
+    method: 'get',
+    params: {
+      type: feachparams.type,
+      content: feachparams.content,
+      is_time_sort_asc: feachparams.is_time_sort_asc
+    }
   })
 }
 

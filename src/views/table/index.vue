@@ -58,9 +58,10 @@
                 <i class="el-icon-arrow-down el-icon--right" />
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="good">良好</el-dropdown-item>
-                <el-dropdown-item command="mid">一般</el-dropdown-item>
-                <el-dropdown-item command="bad">差劲</el-dropdown-item>
+                <el-dropdown-item command="0">默认</el-dropdown-item>
+                <el-dropdown-item command="3">良好</el-dropdown-item>
+                <el-dropdown-item command="2">一般</el-dropdown-item>
+                <el-dropdown-item command="1">差劲</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -139,9 +140,16 @@ export default {
       hideindex: true,
       pagesize: 20,
       currentpage: 1,
+      fetchparams: {
+        page: '',
+        type: '',
+        content: '', // 关键字
+        is_time_sort_asc: 0 // 0是按时间降序,1是按时间升序
+      }, // fetchData参数
       list: [],
       listLoading: true,
       total: 0,
+
       listQuery: {
         page: 5,
         limit: 20
@@ -151,24 +159,35 @@ export default {
     }
   },
   created() {
-    this.fetchData(this.currentpage)
+    this.fetchData()
   },
   methods: {
+    // 根据时间排序  升序command=='asc'  降序command=='desc'
     handleCommandBytime(command) {
-      // 根据时间排序  升序command=='esc'  降序command=='desc'
-      alert(command)
+      if (command === 'asc' && this.fetchparams.is_time_sort_asc !== 1) {
+        this.fetchparams.is_time_sort_asc = 1
+        this.fetchData()
+      } else if (command === 'desc' && this.fetchparams.is_time_sort_asc !== 0) {
+        this.fetchparams.is_time_sort_asc = 0
+        this.fetchData()
+      }
     },
+    // 根据评价设置请求参数
     handleCommandBycomment(command) {
-      // 根据评论排序 升序command=='esc'  降序command=='desc'
-      alert(command)
+      if (command !== this.fetchparams.type) {
+        this.fetchparams.type = command
+        this.fetchData()
+      }
     },
-    fetchData(newPage) {
+    fetchData() {
       this.listLoading = true
-      getList(newPage).then(response => {
+      // 设置请求参数
+      this.fetchparams.page = this.currentpage
+
+      getList(this.fetchparams).then(response => {
         this.list = response.data.list
         this.total = response.data.count
         this.listLoading = false
-        this.baseindex = (newPage - 1) * this.pagesize
         this.hideindex = false
       })
     },
@@ -176,7 +195,7 @@ export default {
     handleCurrentChange(newPage) {
       this.listQuery.pagenum = newPage
       this.currentpage = newPage
-      this.fetchData(newPage)
+      this.fetchData()
       // 回到顶部
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
@@ -192,7 +211,6 @@ export default {
       this.$router.push('/newInf')
     },
     onDelete(id) {
-      console.log(this.currentpage)
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -209,7 +227,7 @@ export default {
             if (this.currentpage > 1) { this.currentpage-- }
           }
 
-          this.fetchData(this.currentpage)
+          this.fetchData()
         })
       }).catch(() => {
       })
