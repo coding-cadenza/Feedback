@@ -216,7 +216,7 @@ export default {
     },
     onExportData() {
       ExportData().then(res => {
-        window.open(res.data)
+        window.open(res.data, self)
       })
     }
   }
