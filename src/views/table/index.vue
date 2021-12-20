@@ -44,13 +44,13 @@
           <span>{{ scope.row.input_time }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="评价内容" style="table-layout:fixed;" align="left" :show-overflow-tooltip="true">
+      <el-table-column label="评价内容" style="table-layout:fixed;" align="center" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           {{ scope.row.content }}
         </template>
       </el-table-column>
 
-      <el-table-column class-name="status-col" label="评价等级" width="110" align="center">
+      <el-table-column class-name="status-col" label="评价等级" width="105" align="center">
         <template slot="header" slot-scope="scope">
           <div> 评价等级
             <el-dropdown @command="handleCommandBycomment">
@@ -70,9 +70,9 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" prop="created_at" label="反馈截图" width="200">
+      <el-table-column align="center" prop="created_at" label="反馈截图" width="150">
         <template slot-scope="scope">
-          <div v-for="capture in scope.row.captures " :key="capture" class="image-comtainer">
+          <div v-for="capture in scope.row.captures " :key="capture" class="image-container">
             <el-image :src="capture" :preview-src-list="[capture]" />
           </div>
         </template>
@@ -80,15 +80,15 @@
 
       <el-table-column align="center" prop="created_at" label="录入员" width="100" :show-overflow-tooltip="true">
         <template slot-scope="scope">
-          <span>{{ scope.row.operator }}</span>
+          <span align="left">{{ scope.row.operator }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column align="center" prop="created_at" label="操作" width="200">
+      <el-table-column align="center" prop="created_at" label="操作" width="150">
         <template slot-scope="scope">
           <el-row>
-            <el-button type="primary" @click="onUpdate(scope.row.feedback_id)">修改</el-button>
-            <el-button type="danger" @click="onDelete(scope.row.feedback_id)">删除</el-button>
+            <el-button class="operate-button" type="primary" @click="onUpdate(scope.row.feedback_id)">修改</el-button>
+            <el-button class="operate-button" type="danger" @click="onDelete(scope.row.feedback_id)">删除</el-button>
           </el-row>
         </template>
       </el-table-column>
@@ -137,7 +137,6 @@ export default {
   data() {
     return {
       hideindex: true,
-      baseindex: '',
       pagesize: 20,
       currentpage: 1,
       list: [],
@@ -223,7 +222,7 @@ export default {
   }
 }
 </script>
-<style  >
+<style scoped >
 .hide-index{
   display: none;
 }
@@ -235,14 +234,19 @@ export default {
 
 }
 .el-image{
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 80%;
+  vertical-align:middle;
 }
 
-.img-container{
-  width: 100%;
-  height: 100%;
+.image-container{
+  display: inline-block;
+  line-height: 10%;
+  max-width:30%;
+  max-height: 70%;
+
 }
+
 .pagination-container{
 display: inline-block;
 vertical-align:middle;
@@ -259,14 +263,21 @@ overflow: hidden;
   margin: 0%;
 
 }
-.image-comtainer{
-  display: inline-block;
-  vertical-align: middle;
-  width: 30%;
-  height: 30%;
-  margin-inline: 1%;
-}
+
 .foot-container{
-  margin-top: 10px;
+  margin-top: 5px;
 }
+.operate-button{
+padding: 10px 10px;
+}
+
+>>> .el-table td{
+  padding:5px;
+  max-width: 100%;
+
+}
+>>> .el-table .cell{
+  padding: 0;
+}
+
 </style>

@@ -223,7 +223,7 @@ export default {
 }
 </script>
 
-      <style scoped>
+<style scoped>
 .page-container {
   width: 100%;
   height: 100%;
@@ -298,12 +298,13 @@ export default {
 >>> .el-table__body-wrapper {
   height: 60%;
 }
-.el-table tr,
-.el-table th,
-.el-table td {
+
+>>> .el-table td{
+  padding:0;
+}
+>>>.el-table th{
   padding: 0;
 }
-
 >>> .el-table__header {
   height: 100%;
 }
