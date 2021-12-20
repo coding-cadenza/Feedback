@@ -236,6 +236,8 @@ export default {
 .el-image{
   width: 90%;
   height: 80%;
+  max-width: 40px;
+  max-height: 40px;
   vertical-align:middle;
 }
 
