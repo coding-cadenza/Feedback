@@ -2,7 +2,7 @@
   <div class="app-wrapper">
     <div class="main-container">
       <div class="navbar">
-        <navbar />
+        <navbar ref="mychild" />
       </div>
       <app-main />
     </div>

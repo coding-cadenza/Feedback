@@ -1,11 +1,30 @@
 <template>
   <div class="navbar">
+
     <div class="right-menu">
+      <div
+        class="search-container"
+        :class="{'hide-search':!showsearch}"
+      >
+        <el-input
+          v-model="content"
+          class="search-text"
+          placeholder="按评价内容关键字搜索"
+        />
+        <el-button
+          slot="append"
+          class="search-button"
+          icon="el-icon-search"
+          @click="searchbycontent()"
+        />
+      </div>
       <div class="avatar-container">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img
+            :src="avatar+'?imageView2/1/w/80/h/80'"
+            class="user-avatar"
+          >
         </div>
-
       </div>
       <div class="user-name-logout">
         <div class="user-name">{{ name }}</div>
@@ -21,19 +40,35 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  data() {
+    return {
+      content: '', // 搜索内容
+      showsearch: true
+    }
+  },
   computed: {
-    ...mapGetters([
-      'avatar',
-      'name'
-    ])
+    ...mapGetters(['avatar', 'name'])
+  },
+  watch: {
+    $route(route) {
+      if (route.path.startsWith('/table')) {
+        this.showsearch = true
+      } else {
+        this.showsearch = false
+      }
+    }
   },
   methods: {
     // await 来等待，相当于then
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push('/login')
+    },
+    searchbycontent() {
+      this.$bus.$emit('searchbycontent', this.content)
     }
   }
+
 }
 </script>
 
@@ -43,42 +78,64 @@ export default {
   overflow: hidden;
   position: relative;
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .right-menu {
     float: right;
     height: 100%;
-    width: 140px;
+    width: 580px;
     margin-right: 10px;
 
+    /*搜索框*/
+    .search-container {
+      height: 80%;
+      width: 360px;
+      margin-right: 80px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-top: 5px;
+      .search-text {
+        width: 80%;
+        vertical-align: middle;
+      }
+      .search-button {
+        vertical-align: middle;
+      }
+
+    }
+    .hide-search{
+      visibility: hidden;
+    }
+
+    /**头像部分*/
     .avatar-container {
       margin-right: 10px;
       width: 50px;
       height: 50px;
       display: inline-block;
 
-      .user-avatar{
+      .user-avatar {
         width: 100%;
         height: 100%;
         border-radius: 50%;
       }
     }
-    .user-name-logout{
-       display: inline-block;
-       vertical-align: bottom;
-       height: 50px;
-       width: 70px;
-       position: relative;
+    /*用户名和登录部分*/
+    .user-name-logout {
+      display: inline-block;
+      vertical-align: bottom;
+      height: 50px;
+      width: 70px;
+      position: relative;
 
-       .user-name{
+      .user-name {
         margin-bottom: 2px;
         overflow: hidden;
         height: 18px;
-       }
-       .log-out{
+      }
+      .log-out {
         margin-top: 7px;
-       }
-
+      }
     }
   }
 }

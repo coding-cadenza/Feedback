@@ -27,7 +27,7 @@
           <span>{{ scope.row.target }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="评价时间" :render-header="renderHeader" width="180" align="center" :show-overflow-tooltip="true">
+      <el-table-column label="评价时间" width="180" align="center" :show-overflow-tooltip="true">
         <template slot="header" slot-scope="scope">
           上传时间
           <el-dropdown @command="handleCommandBytime">
@@ -137,6 +137,7 @@ export default {
   },
   data() {
     return {
+
       hideindex: true,
       pagesize: 20,
       currentpage: 1,
@@ -161,6 +162,13 @@ export default {
   created() {
     this.fetchData()
   },
+  mounted() {
+    this.$bus.$on('searchbycontent', (content) => {
+      this.fetchparams.content = content
+      this.fetchData()
+    })
+  },
+
   methods: {
     // 根据时间排序  升序command=='asc'  降序command=='desc'
     handleCommandBytime(command) {
@@ -186,6 +194,10 @@ export default {
 
       getList(this.fetchparams).then(response => {
         this.list = response.data.list
+        // 解析时间
+        this.list.forEach((ele, index) => {
+          this.list[index].input_time = ele.input_time.replace('T', ' ').replace('Z', ' ')
+        })
         this.total = response.data.count
         this.listLoading = false
         this.hideindex = false
@@ -211,7 +223,7 @@ export default {
       this.$router.push('/newInf')
     },
     onDelete(id) {
-      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+      this.$confirm('此操作将永久删除该记录, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -237,6 +249,7 @@ export default {
         window.open(res.data, self)
       })
     }
+
   }
 }
 </script>

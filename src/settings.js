@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '客户反馈系统',
+  title: '校园反馈系统',
 
   /**
    * @type {boolean} true | false
