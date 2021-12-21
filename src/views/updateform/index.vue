@@ -192,7 +192,7 @@ export default {
       var temp = []
       // 将图片放入list(本来有的不放)
       fileList.forEach(element => {
-        if (element.raw !== undefined) {
+        if (element.raw) {
           temp.push(element.raw)
         }
       })
@@ -283,17 +283,20 @@ export default {
 .disUoloadSty .el-upload--picture-card{
   display: none;
 }
+.operator{
+  min-width: 500px;
+}
 .client_name{
-  width: 150px;
+  min-width:50%;
 }
 .client_enterprise{
-  width:255px;
+  min-width:165%;
 }
 .target{
-  width:505px;
+  min-width:500px;
 }
 .content{
-  width:505px;
+  min-width:500px;
 }
 .front {
   z-index: 1;
@@ -306,14 +309,12 @@ export default {
   justify-content: center;
   align-items: center;
   color: #ffffff;
-
 }
 .app-container{
 align-items: center;
-background-color: var(black);
 }
 .el-card{
-  width: 660px;
+  width: 670px;
   border-radius: 4px;
   max-height : 98%;
   overflow:auto;

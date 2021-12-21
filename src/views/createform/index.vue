@@ -5,7 +5,11 @@
       <div class="front">
         <el-card :body-style="{padding:'30px'}">
           <el-row>
-            <el-form-item label="录入员" prop="operator">
+            <el-form-item
+              label="录入员"
+              prop="operator"
+              class="operator"
+            >
               <el-input v-model="form.operator" class="operator" placeholder="录入员..." :disabled="true" />
             </el-form-item>
           </el-row>
@@ -253,17 +257,20 @@ export default {
 .disUoloadSty .el-upload--picture-card{
   display: none;
 }
+.operator{
+  min-width: 500px;
+}
 .client_name{
-  width: 150px;
+  min-width:50%;
 }
 .client_enterprise{
-  width:255px;
+  min-width:165%;
 }
 .target{
-  width:505px;
+  min-width:500px;
 }
 .content{
-  width:505px;
+  min-width:500px;
 }
 .front {
   z-index: 1;
@@ -279,10 +286,9 @@ export default {
 }
 .app-container{
 align-items: center;
-background-color: var(--white);
 }
 .el-card{
-  width: 660px;
+  width: 670px;
   border-radius: 4px;
   max-height : 98%;
   overflow:auto;

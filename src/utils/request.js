@@ -35,8 +35,31 @@ service.interceptors.response.use(
     const res = response.data
     // 如果返回code不是200，
     if (res.code !== 200) {
-      // 这里再加一个回到登陆界面
-      return Promise.reject(new Error(res.msg || 'Error'))
+      // 401表示没有权限，劝退
+      if (res.code === 401) {
+        Message({
+          message: '请先登录',
+          type: 'error',
+          duration: 3 * 1000
+        })
+
+        // 清除cookie
+        var expires = new Date()
+        expires.setTime(expires.getTime() - 1)
+        document.cookie = 'username=;expires=' + expires.toGMTString()
+        document.cookie = 'avatar=;expires=' + expires.toGMTString()
+        store.dispatch('user/resetUserInfo')
+        // 跳回登录页面
+        router.push('/login')
+      } else {
+        Message({
+          message: res.msg,
+          type: 'error',
+          duration: 3 * 1000
+        })
+      }
+
+      return Promise.reject(new Error(res.msg))
     } else {
       return res
     }
