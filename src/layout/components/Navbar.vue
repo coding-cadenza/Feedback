@@ -89,18 +89,18 @@ export default {
 
     /*搜索框*/
     .search-container {
-      height: 40px;
+      height: 50px;
       width: 360px;
       margin-right: 80px;
       display: inline-block;
-      vertical-align: middle;
+      vertical-align: top;
       margin-top: 5px;
       .search-text {
         width: 80%;
-        vertical-align: middle;
+        vertical-align: top;
       }
       .search-button {
-        vertical-align: middle;
+        vertical-align: top;
       }
 
     }
@@ -114,7 +114,7 @@ export default {
       width: 50px;
       height: 50px;
       display: inline-block;
-
+      vertical-align: top;
       .user-avatar {
         width: 100%;
         height: 100%;
@@ -124,13 +124,12 @@ export default {
     /*用户名和登录部分*/
     .user-name-logout {
       display: inline-block;
-      vertical-align: bottom;
+      vertical-align: top;
       height: 50px;
       width: 70px;
-      position: relative;
 
       .user-name {
-        margin-bottom: 2px;
+        margin-top:3px;
         overflow: hidden;
         height: 18px;
       }
@@ -141,9 +140,10 @@ export default {
   }
   .left-title{
     float: left;
-    height: 100%;
+    height: 50px;
     width: 400px;
     display: inline-block;
+    vertical-align:top;
     .logo-img{
       height: 40px;
       width:40px;
@@ -156,7 +156,7 @@ export default {
     .title{
       max-height: 100%;
       display: inline-block;
-      vertical-align: middle;
+      vertical-align: top;
       margin-left: 9px;
       margin-bottom: 0;
       margin-top: 11px;
