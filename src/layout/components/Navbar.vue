@@ -10,6 +10,7 @@
           v-model="content"
           class="search-text"
           placeholder="按评价内容关键字搜索"
+          @keyup.enter.native="searchbycontent()"
         />
         <el-button
           slot="append"
