@@ -282,7 +282,7 @@ align-items: center;
 background-color: var(--white);
 }
 .el-card{
-  width: 660px;
+  width: 670px;
   border-radius: 4px;
   max-height : 98%;
   overflow:auto;
