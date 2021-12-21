@@ -24,7 +24,7 @@
           <el-table-column
             align="center"
             prop="client_name"
-            label="客户姓名"
+            label="反馈人姓名"
             width="100px"
             :show-overflow-tooltip="true"
           />
