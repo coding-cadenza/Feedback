@@ -82,13 +82,14 @@ export default {
 
   .right-menu {
     float: right;
-    height: 100%;
+    height: 50px;
     width: 580px;
     margin-right: 10px;
+    margin-top: 0;
 
     /*搜索框*/
     .search-container {
-      height: 80%;
+      height: 40px;
       width: 360px;
       margin-right: 80px;
       display: inline-block;
