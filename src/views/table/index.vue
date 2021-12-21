@@ -195,7 +195,7 @@ export default {
 
       getList(this.fetchparams).then(response => {
         // 在查找的时候，如果查找的页数过大，可能会显示没有数据，这时候要查找前一页
-        if (response.data.list.length === 0 && this.currentpage !== 0) {
+        if (response.data.list.length === 0 && this.currentpage !== 1) {
           this.currentpage -= 1
           this.fetchData()
         } else {
