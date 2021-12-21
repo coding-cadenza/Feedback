@@ -6,6 +6,7 @@
       :data="list"
       style="width:100%"
       element-loading-text="Loading"
+
       border
       fit
       highlight-current-row
@@ -259,9 +260,11 @@ export default {
 }
 .table-container{
   width: 90%;
-  height: 100%;
+  height: 90%;
   margin: auto;
   overflow: hidden;
+  margin-top:10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 
 }
 .el-image{
@@ -283,12 +286,15 @@ export default {
 .pagination-container{
 display: inline-block;
 vertical-align:middle;
+margin-top: 9px;
 }
 .right-bo-button-contain{
 display: inline-block;
 vertical-align:middle;
 float: right;
 overflow: hidden;
+margin-top: 5px;
+margin-right: 5px;
 }
 
 .right-bo-button-icon{
@@ -298,7 +304,8 @@ overflow: hidden;
 }
 
 .foot-container{
-  margin-top: 5px;
+  height: 50px;
+
 }
 .operate-button{
 padding: 10px 10px;

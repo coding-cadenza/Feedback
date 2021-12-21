@@ -313,10 +313,11 @@ background-color: var(--white);
 background-Image:'url('+require('assets/images/noFeedBack.png')+')'
 }
 .el-card{
-  width: 640px;
+  width: 670px;
   border-radius: 4px;
-  max-height : 90%;
+  max-height : 98%;
   overflow:auto;
+
 }
 </style>
 
