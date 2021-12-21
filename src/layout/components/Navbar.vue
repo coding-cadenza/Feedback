@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-
+    <div class="left-title"><img src="@/assets/images/logo.png" class="logo-img"><h2 class="title">校园反馈系统</h2></div>
     <div class="right-menu">
       <div
         class="search-container"
@@ -136,6 +136,31 @@ export default {
       .log-out {
         margin-top: 7px;
       }
+    }
+  }
+  .left-title{
+    float: left;
+    height: 100%;
+    width: 400px;
+    display: inline-block;
+    .logo-img{
+      height: 40px;
+      width:40px;
+      margin-left:10px;
+      margin-top: 5px;
+      display: inline-block;
+      vertical-align:top;
+
+    }
+    .title{
+      max-height: 100%;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 9px;
+      margin-bottom: 0;
+      margin-top: 11px;
+      font-size: 24px;
+      font-family:'STKaiti'
     }
   }
 }
