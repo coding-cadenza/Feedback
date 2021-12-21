@@ -284,16 +284,16 @@ export default {
   display: none;
 }
 .client_name{
-  width: 120px;
+  width: 150px;
 }
 .client_enterprise{
-  width:265px;
+  width:255px;
 }
 .target{
-  width:480px;
+  width:505px;
 }
 .content{
-  width:480px;
+  width:505px;
 }
 .front {
   z-index: 1;
@@ -306,17 +306,18 @@ export default {
   justify-content: center;
   align-items: center;
   color: #ffffff;
+
 }
 .app-container{
 align-items: center;
-background-color: var(--white);
-background-Image:'url('+require('assets/images/noFeedBack.png')+')'
+background-color: var(black);
 }
 .el-card{
-  width: 640px;
+  width: 660px;
   border-radius: 4px;
-  max-height : 90%;
+  max-height : 98%;
   overflow:auto;
+
 }
 </style>
 
