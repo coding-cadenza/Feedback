@@ -194,14 +194,20 @@ export default {
       this.fetchparams.page = this.currentpage
 
       getList(this.fetchparams).then(response => {
-        this.list = response.data.list
-        // 解析时间
-        this.list.forEach((ele, index) => {
-          this.list[index].input_time = ele.input_time.replace('T', ' ').replace('Z', ' ')
-        })
-        this.total = response.data.count
-        this.listLoading = false
-        this.hideindex = false
+        // 在查找的时候，如果查找的页数过大，可能会显示没有数据，这时候要查找前一页
+        if (response.data.list.length === 0 && this.currentpage !== 0) {
+          this.currentpage -= 1
+          this.fetchData()
+        } else {
+          this.list = response.data.list
+          // 解析时间
+          this.list.forEach((ele, index) => {
+            this.list[index].input_time = ele.input_time.replace('T', ' ').replace('Z', ' ')
+          })
+          this.total = response.data.count
+          this.listLoading = false
+          this.hideindex = false
+        }
       })
     },
 
