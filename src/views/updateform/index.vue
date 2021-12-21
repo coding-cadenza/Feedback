@@ -192,7 +192,7 @@ export default {
       var temp = []
       // 将图片放入list(本来有的不放)
       fileList.forEach(element => {
-        if (element.raw !== undefined) {
+        if (element.raw) {
           temp.push(element.raw)
         }
       })
