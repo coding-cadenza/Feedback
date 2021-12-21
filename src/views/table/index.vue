@@ -10,7 +10,7 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="客户姓名" width="100" :show-overflow-tooltip="true">
+      <el-table-column align="center" label="反馈人姓名" width="100" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           {{ scope.row.client_name }}
         </template>

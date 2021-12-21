@@ -10,12 +10,12 @@
             </el-form-item>
           </el-row>
           <el-row align="middle" justify="center">
-            <el-col :span="9">
-              <el-form-item label="客户姓名" prop="client_name">
+            <el-col :span="10">
+              <el-form-item label="反馈人姓名" prop="client_name">
                 <el-input
                   v-model="form.client_name"
                   class="client_name"
-                  placeholder="客户姓名..."
+                  placeholder="反馈人姓名..."
                   value="sum"
                   onchange="this.value=this.value.substring(0, 20)"
                   onkeydown="this.value=this.value.substring(0, 20)"
@@ -110,14 +110,14 @@
 
           <el-form-item>
             <el-row :gutter="20">
-              <el-col :span="6">
+              <el-col :span="10">
                 <el-button
                   type="primary"
                   :disabled="submitLoading"
                   @click="onSubmit('form')"
                 >{{ submitLoading ? '处理中...' : '确定' }}</el-button>
               </el-col>
-              <el-col :span="6">
+              <el-col :span="8">
                 <el-button @click="onCancel('form')">返回</el-button>
               </el-col>
             </el-row>
@@ -154,7 +154,7 @@ export default {
       },
       rule: {
         client_name: [
-          { required: true, message: '请输入客户姓名', trigger: 'blur' },
+          { required: true, message: '请输入反馈人姓名', trigger: 'blur' },
           { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'change' }],
         client_enterprise: [{ required: true, message: '请输入反馈人身份', trigger: 'blur' },
           { min: 2, max: 30, message: '长度在 2 到 30 个字符', trigger: 'change' }],
@@ -254,16 +254,16 @@ export default {
   display: none;
 }
 .client_name{
-  width: 120px;
+  width: 150px;
 }
 .client_enterprise{
-  width:265px;
+  width:255px;
 }
 .target{
-  width:480px;
+  width:505px;
 }
 .content{
-  width:480px;
+  width:505px;
 }
 .front {
   z-index: 1;
@@ -278,15 +278,14 @@ export default {
   color: #ffffff;
 }
 .app-container{
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+align-items: center;
+background-color: var(--white);
 }
 .el-card{
-  width: 640px;
-  border-radius: 4px
+  width: 660px;
+  border-radius: 4px;
+  max-height : 98%;
+  overflow:auto;
 
 }
 </style>
