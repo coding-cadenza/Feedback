@@ -48,6 +48,7 @@ service.interceptors.response.use(
         expires.setTime(expires.getTime() - 1)
         document.cookie = 'username=;expires=' + expires.toGMTString()
         document.cookie = 'avatar=;expires=' + expires.toGMTString()
+        document.cookie = 'feedback_session=;expires=' + expires.toGMTString()
         store.dispatch('user/resetUserInfo')
         // 跳回登录页面
         router.push('/login')

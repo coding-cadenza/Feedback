@@ -11,6 +11,12 @@ const state = getDefaultState()
 const mutations = {
   RESET_STATE: (state) => {
     Object.assign(state, getDefaultState())
+    // 删除cookie
+    var expires = new Date()
+    expires.setTime(expires.getTime() - 1)
+    document.cookie = 'username=;expires=' + expires.toGMTString()
+    document.cookie = 'avatar=;expires=' + expires.toGMTString()
+    document.cookie = 'feedback_session=;expires=' + expires.toGMTString()
   },
   GET_NAME: (state) => {
     state.name = Cookies.get('username')
